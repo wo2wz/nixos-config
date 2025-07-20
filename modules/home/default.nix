@@ -3,7 +3,6 @@
 {
   imports = [
     ./bash.nix
-    ./desktop-files.nix
     ./git.nix
     ./kitty.nix
     ./librewolf.nix
