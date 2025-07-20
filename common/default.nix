@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   imports = [
@@ -10,4 +10,11 @@
     ./swap.nix
     ./users.nix
   ];
+
+  environment = {
+    systemPackages = with pkgs; [ wget ];
+
+    # remove perl from default packages
+    defaultPackages = with pkgs; lib.mkForce [ rsync strace ];
+  };
 }

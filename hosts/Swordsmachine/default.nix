@@ -27,7 +27,6 @@
     cameractrls
     # for key replacement macros
     xautomation
-    wget
   ];
 
   home-manager.users.wo2w = {

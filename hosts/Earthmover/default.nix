@@ -10,6 +10,8 @@
     ../../modules/nixos
   ];
 
+  services.hardware.openrgb.enable = true;
+
   home-manager.users.wo2w = {
     imports = [
       ../../modules/home

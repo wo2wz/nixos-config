@@ -5,12 +5,29 @@
     startAgent = true;
     enableAskPassword = true;
     extraConfig = "
+      IdentityFile /home/wo2w/.ssh/ssh-key
+      User wo2w
       Host gameserver
         Hostname 192.168.2.221
         Port 22
-        User wo2w
-        IdentityFile /home/wo2w/.ssh/ssh-key
+      Host Swordsmachine
+        Hostname 192.168.2.122
+        Port 8743
+      Host Earthmover
+        Hostname 192.168.2.147
+        Port 8743
     ";
+  };
+
+  services.openssh = {
+    enable = true;
+    ports = [ 8743 ];
+    settings = {
+      PasswordAuthentication = false;
+      KbdInteractiveAuthentication = false;
+      PermitRootLogin = "no";
+      AllowUsers = [ "wo2w" ];
+    };
   };
 
   environment = {
