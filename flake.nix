@@ -1,5 +1,5 @@
 {
-  description = "GraalVM Java 17/21, Spotify, and Home Manager";
+  description = "all this does now is pass inputs to other modules and set the system variable";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
@@ -41,45 +41,18 @@
       stylix,
       ...
     }@inputs:
-    let
+    let      
       system = "x86_64-linux";
-
-      # define overlays
-      nixpkgs-pin-overlay = final: prev: {
-        nixpkgs-pin = nixpkgs-pin.legacyPackages.${prev.system};
-      };
-
-      overlay-unstable = final: prev: {
-        unstable = import nixpkgs-unstable {
-          inherit system;
-          config.allowUnfree = true;
+      nixosSystem =
+        hostName:
+        nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit hostName inputs system; };
+          modules = [ ./hosts/${hostName} ];
         };
-      };
     in {
-      nixosConfigurations.Ares = nixpkgs.lib.nixosSystem {
-        inherit system;
-        modules = [
-          # make nixpkgs-pin and unstable available in configuration.nix
-          ({ config, pkgs, ... }: { nixpkgs.overlays = [ nixpkgs-pin-overlay ]; })
-          ({ config, pkgs, ... }: { nixpkgs.overlays = [ overlay-unstable ]; })
-
-          ./hardware-configuration.nix
-          ./configuration.nix
-          
-          nixos-hardware.nixosModules.dell-xps-15-9570-nvidia
-          home-manager.nixosModules.home-manager
-          stylix.nixosModules.stylix
-
-          {
-          home-manager = {
-            useGlobalPkgs = true;
-            useUserPackages = true;
-            users.wo2w = import ./home.nix;
-            backupFileExtension = "bak";
-            extraSpecialArgs = { inherit inputs; };
-          };
-          }
-        ];
+      nixosConfigurations = {
+        Swordsmachine = nixosSystem "Swordsmachine";
+        Earthmover = nixosSystem "Earthmover";
       };
   };
 }
