@@ -29,7 +29,10 @@
   environment.systemPackages = with pkgs; [
     bitwarden
     krita
-    gpu-screen-recorder-gtk
     vlc
+    gpu-screen-recorder-gtk
   ];
+
+  # needed alongside the GUI app for promptless recording
+  programs.gpu-screen-recorder.enable = true;
 }

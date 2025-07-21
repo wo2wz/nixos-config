@@ -40,6 +40,9 @@
     ];
 
     home.file = {
+      # yubikey config
+      ".config/Yubico/u2f_keys".text = "wo2w:aKYaBOjCImRE58XcYJCqxpY0vABEIYWbk2Lvx4UqnN3M/A1uyr3boV4FZLkfxUwmlfBdMDm4caSaX1/SrNoNgw==,zruscj30G6zEt8xmlvTXBBEKIzg+fPCSq/FvhZO3X0HyP2uBLsWSXqCyRKXM8H9F/GJwJWBpyoHj/dhkxj7eZg==,es256,+presence";
+
       ".local/share/applications/kitty.desktop".text = ''
         [Desktop Entry]
         Version=1.0

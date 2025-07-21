@@ -13,6 +13,13 @@
         # discord rpc
         leonardssh.vscord
       ];
+
+      userSettings = {
+        "workbench.colorTheme" = "Tokyo Night";
+
+        # disable trust prompts
+        "security.workspace.trust.enabled" = false;
+      };
     };
   };
 }

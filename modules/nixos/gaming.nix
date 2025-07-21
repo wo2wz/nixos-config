@@ -14,8 +14,8 @@ in {
     };
   };
   environment.systemPackages = with pkgs; [
-    # heroic games launcher
-    heroic
+    gamescope # screen resolution controller for games that have bugs when changing resolution
+    heroic # heroic games launcher
     (prismlauncher.override {
       # Change Java runtimes available to Prism Launcher
       jdks = [
