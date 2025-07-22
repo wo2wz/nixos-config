@@ -17,10 +17,4 @@
   };
 
   time.timeZone = "America/New_York";
-
-  # x11 keymap
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
-  };
 }
