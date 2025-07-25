@@ -6,6 +6,8 @@
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-pin.url = "github:NixOS/nixpkgs/336eda0d07dc5e2be1f923990ad9fdb6bc8e28e3";
 
+    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
+
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
     home-manager = {
