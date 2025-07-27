@@ -1,12 +1,6 @@
 { inputs, config, pkgs, ... }:
 
 {
-  imports = [
-    inputs.chaotic.nixosModules.nyx-cache
-    inputs.chaotic.nixosModules.nyx-overlay
-    inputs.chaotic.nixosModules.nyx-registry
-  ];
-
   boot = {
     loader = {
       systemd-boot = {
@@ -16,8 +10,6 @@
       };
       efi.canTouchEfiVariables = true;
     };
-
-    kernelPackages = pkgs.linuxPackages_cachyos;
   };
 
   services.scx = {

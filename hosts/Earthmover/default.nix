@@ -8,6 +8,8 @@
     ../../common/desktop
     ../../modules/common
     ../../modules/nixos
+    
+    ../../common/kernel.nix
   ];
 
   home-manager.users.wo2w = {
