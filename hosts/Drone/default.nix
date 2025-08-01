@@ -10,6 +10,11 @@
     ../../modules/nixos/bash.nix
   ];
 
+  swapDevices = [{ 
+    device = "/swap/swapfile"; 
+    size = 8*1024;
+  }];
+
   networking.hostName = "${hostName}";
 
   environment.defaultPackages = lib.mkForce [];
