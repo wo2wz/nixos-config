@@ -2,6 +2,8 @@
 
 {
   imports = [
+    ./hardware-configuration.nix
+    
     ../../common/boot.nix
     ../../common/locales.nix
     ../../common/nix.nix
