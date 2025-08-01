@@ -60,6 +60,7 @@
       nixosConfigurations = {
         Swordsmachine = nixosSystem "Swordsmachine";
         Earthmover = nixosSystem "Earthmover";
+        Drone = nixosSystem "Drone";
       };
   };
 }
