@@ -1,31 +1,68 @@
 { inputs, config, pkgs, ... }:
 
 {
+  # compositor: niri
+  # bar: waybar
+  # application launcher: rofi
+  # idle daemon: hypridle
+  # screen locker: hyprlock
+  # wallpaper daemon: wpaperd
+  # notification daemon: mako
+  # screenshot tool: flameshot
+
+
   imports = [ inputs.niri.nixosModules.niri ];
   nixpkgs.overlays = [ inputs.niri.overlays.niri ];
 
-  programs = {
-    niri.enable = true;
-    waybar.enable = true;
-  };
+  programs.niri.enable = true;
 
   environment.systemPackages = with pkgs; [
-    mako # notif daemon, may replace
-    swaybg # wayland compositor wallpaper program
+    wpaperd # wallpaper daemon (higher memory usage than average, could replace)
     xwayland-satellite # necessary for xwayland on niri
     (flameshot.override { enableWlrSupport = true; }) # screenshot program
   ];
 
   home-manager.users.wo2w = {
+    xdg.configFile."wpaperd/config.toml".text = ''
+      [default]
+      duration = "2h"
+      mode = "stretch"
+      path = "/home/wo2w/Pictures/Wallpapers"
+      initial-transition = false
+    '';
+
     programs = {
       niri = {
         settings = {
+          hotkey-overlay.skip-at-startup = true;
+          prefer-no-csd = true;
+
+          environment.DISPLAY = ":0";
+
+          screenshot-path = "~/Pictures/Screenshots/%F_%H-%M-%S";
+
+          outputs = {
+            "Sharp Corporation 0x148D Unknown".scale = 2.25; # Laptop builtin screen
+          };
+
           binds = {
             # custom binds
             "Mod+Space".action.spawn = [ "rofi" "-show" "drun" ];
-            "Print".action.spawn = [ "sh" "-c" "QT_QPA_PLATFORM=xcb" "DISPLAY=:0" "flameshot" "screen" ];
-            "Shift+Print".action.spawn = [ "sh" "-c" "QT_QPA_PLATFORM=xcb" "DISPLAY=:0" "flameshot" "gui" ];
+            "Print".action.screenshot-screen = {};
+            "Shift+Print".action.screenshot = {};
+            "Alt+Print".action.screenshot-window = {};
             "Mod+Print".action.spawn = [ "sh" "-c" "QT_QPA_PLATFORM=xcb" "DISPLAY=:0" "flameshot" "full" ];
+            "Mod+T".action.spawn = "kitty";
+          
+            "Super+Alt+L".action.spawn = "hyprlock";
+            "Super+Alt+S".action.spawn = [ "systemctl" "sleep" ];
+            "Super+Alt+E".action.quit.skip-confirmation = true;
+            "Super+Alt+Shift+S".action.spawn = "poweroff";
+            "Super+Alt+Shift+R".action.spawn = "reboot";
+
+            "Mod+O".action.open-overview = {};
+            "Mod+V".action.toggle-window-floating = {};
+            "Mod+Shift+V".action.switch-focus-between-floating-and-tiling = {};
             
 
             # default binds
@@ -33,10 +70,6 @@
             # Mod-Shift-/, which is usually the same as Mod-?,
             # shows a list of important hotkeys.
             "Mod+Shift+Slash".action.show-hotkey-overlay = {};
-
-            # Suggested binds for running programs: terminal, app launcher, screen locker.
-            "Mod+T".action.spawn = "kitty";
-            "Super+Alt+L".action.spawn = "swaylock";
 
             # You can also use a shell. Do this if you need pipes, multiple commands, etc.
             # Note: the entire command goes as a single argument in the end.
@@ -245,9 +278,6 @@
             "Ctrl+Print".action.screenshot-screen = {};
             "Alt+Print".action.screenshot-window = {};
 
-            # The quit action will show a confirmation dialog to avoid accidental exits.
-            "Mod+Shift+E".action.quit = {};
-
             # Powers off the monitors. To turn them back on, do any input like
             # moving the mouse or pressing any other key.
             "Mod+Shift+P".action.power-off-monitors = {};
@@ -255,32 +285,92 @@
 
           spawn-at-startup = [
             { command = [ "xwayland-satellite" ]; }
+            { command = [ "wpaperd" "-d" ]; }
           ];
+
+          workspaces = {
+            "01-DP-1-misc" = {
+              name = "Miscellaneous";
+              open-on-output = "DP-1";
+            };
+            "02-DP-1-game" = {
+              name = "Gaming";
+              open-on-output = "DP-1";
+            };
+            "03-DP-2-fullscreen" = {
+              name = "Fullscreen";
+              open-on-output = "DP-2";
+            };
+            "04-DP-2-misc" = {
+              name = "Miscellaneous 2";
+              open-on-output = "DP-2";
+            };
+          };
 
           window-rules = [
             {
               matches = [{ title = "^Bitwarden$"; }];
-              block-out-from = "screencast";
+              block-out-from = "screen-capture";
             }
             {
-              matches = [{ title = "PolicyKit1 KDE Agent$"; }];
-              block-out-from = "screencast";
+              matches = [{ app-id = "^org.kde.polkit-kde-authentication-agent-1$"; }];
+              block-out-from = "screen-capture";
               open-floating = true;
             }
             # put steam notifications in the bottom right
             {
-              matches = [{ 
-                app-id = "steam";
-                title = "^notificationtoasts_\d+_desktop$";
-              }];
+              matches = [
+                { app-id = "steam"; }
+                { title = "^notificationtoasts_\d+_desktop$"; }
+              ];
               default-floating-position = {
                 x = 10;
                 y = 10;
                 relative-to = "bottom-right";
               };
             }
+            # Gaming (DP-1)
+            {
+              matches = [
+                { app-id = "steam"; }
+                { title = "^Steam$"; }
+              ];
+              open-on-workspace = "Gaming";
+            }
+            {
+              matches = [{ app-id = "heroic"; }];
+              open-on-workspace = "Gaming";
+            }
+            {
+              matches = [{ app-id = "org.prismlauncher.PrismLauncher"; }];
+              open-on-workspace = "Gaming";
+            }
+            {
+              matches = [{ app-id = "vesktop"; }];
+              open-on-workspace = "Gaming";
+            }
+            # Text Editing 
+            # Fullscreen (DP-2)
+            {
+              matches = [{ app-id = "librewolf"; }];
+              open-on-workspace = "Fullscreen";
+            }
+            {
+              matches = [{ app-id = "spotify"; }];
+              open-on-workspace = "Fullscreen";
+            }
+            # Miscellaneous 2 (DP-2)
+            {
+              matches = [{ app-id = "com.dec05eba.gpu_screen_recorder"; }];
+              open-on-workspace = "Miscellaneous 2";
+            }
           ];
         };
+      };
+
+      waybar = {
+        enable = true;
+        systemd.enable = true;
       };
 
       rofi = {
@@ -294,26 +384,46 @@
       hyprlock = {
         enable = true;
         settings = {
-          # stop hm complaining about the default config conflicting with custom config (bug?)
+          general.grace = 5;
+
           background = {
             path = "/home/wo2w/Pictures/uni1.jpg";
             blur_passes = 3;
-            color = "rgb(1a1b26)";
           };
 
-          label = {
-            text = "$DESC";
-          };
+          label = [
+            {
+              valign = "top";
+              position = "0, -400";
+              font_size = 128;
+              text = "$TIME";
+            }
+            {
+              position = "0, 180";
+              font_size = 64;
+              text = "$DESC";
+            }
+          ];
 
           input-field = {
-            size = "200, 50";
             position = "0, -80";
+            size = "400, 100";
           };
         };
       };
     };
 
     services = {
+      # notif daemon
+      mako = {
+        enable = true;
+        settings = {
+          max-history = 10;
+          default-timeout = 5000;
+          anchor = "bottom-right";
+        };
+      };
+
       hypridle = {
         enable = true;
         settings = {

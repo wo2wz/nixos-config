@@ -11,10 +11,10 @@
         Hostname 192.168.2.221
         Port 22
       Host Swordsmachine
-        Hostname 192.168.2.122
+        Hostname 192.168.2.84
         Port 8743
       Host Earthmover
-        Hostname 192.168.2.147
+        Hostname 192.168.2.87
         Port 8743
     ";
   };

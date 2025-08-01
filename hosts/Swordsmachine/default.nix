@@ -25,21 +25,22 @@
   };
 
   environment.systemPackages = with pkgs; [
-    # necessary to make the camera not look like the sun
-    cameractrls
-    # for key replacement macros
-    xautomation
+    cameractrls # necessary to make the camera not look like the sun
+    xautomation # for key replacement macros
   ];
 
-  home-manager.users.wo2w =
-  let
-    ifHomeProgramEnable =
-      name:
-      if config.programs.${name}.enable then true else false;
-  in {
+  home-manager.users.wo2w = {
     imports = [
       ../../modules/home
     ];
+
+    programs.btop = {
+      package = pkgs.btop-cuda;
+      settings = {
+        shown_boxes = "cpu mem net proc gpu0";
+        custom_cpu_name = "Core i7-8750H";
+      };
+    };
 
     home.file = {
       # yubikey config

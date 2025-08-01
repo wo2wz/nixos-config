@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ./btop.nix
     ./bash.nix
     ./git.nix
     ./kitty.nix

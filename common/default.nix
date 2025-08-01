@@ -14,7 +14,7 @@
   environment = {
     systemPackages = with pkgs; [ wget ];
 
-    # remove perl from default packages
-    defaultPackages = with pkgs; lib.mkForce [ rsync strace ];
+    # remove default packages
+    defaultPackages = lib.mkForce [ ];
   };
 }
