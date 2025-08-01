@@ -20,4 +20,6 @@
   environment.defaultPackages = lib.mkForce [];
 
   services.scx.scheduler = lib.mkForce "scx_rusty";
+
+  system.stateVersion = "25.05";
 }
