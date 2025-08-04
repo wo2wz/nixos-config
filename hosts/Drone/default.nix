@@ -10,6 +10,7 @@
     ../../common/users.nix
 
     ../../modules/nixos/bash.nix
+    ../../modules/nixos/tailscale.nix
   ];
   
   fileSystems = {
@@ -39,7 +40,9 @@
     };
   };
 
-  services.scx.scheduler = lib.mkForce "scx_rusty";
+  services = {
+    scx.scheduler = lib.mkForce "scx_rusty";
 
+  };
   system.stateVersion = "25.05";
 }
