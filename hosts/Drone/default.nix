@@ -42,7 +42,70 @@
 
   services = {
     scx.scheduler = lib.mkForce "scx_rusty";
+    
+    cloudflared = {
+      enable = true;
+      tunnels = {
+	
+      };
+    };
 
+    caddy = {
+      enable = true;
+      virtualHosts = {
+	"drone.taild5f7e6.ts.net".extraConfig = ''
+	  encode
+
+	  # most of this doesnt matter but why not
+          header {
+	      Strict-Transport-Security "max-age=31536000;"
+	      X-Frame-Options "SAMEORIGIN"
+	      X-Content-Type-Options "nosniff"
+	      -Server
+	      -X-Powered-By
+	  }
+
+	  # block connections to admin login
+          respond /admin/* 403
+	  
+	  reverse_proxy localhost:8000
+        '';
+#	"example.com".extraConfig = ''
+#	  encode
+
+#          header {
+#	      Strict-Transport-Security "max-age=31536000;"
+#	      X-Frame-Options "DENY"
+#	      X-Content-Type-Options "nosniff"
+#	      # nobody is gonna find this site through a search engine anyway
+#	      X-Robots-Tag "noindex, nofollow"
+#	      -Server
+#	      -X-Powered-By
+#	  }
+
+#	  reverse_proxy localhost:3000
+#	'';
+      };
+    };
+
+    tailscale.permitCertUid = "caddy"; # allow caddy to manage tailscale ssl certs
+
+    vaultwarden = {
+      enable = true;
+      backupDir = "/var/backups/vaultwarden";
+      config = {
+        DOMAIN = "https://drone.taild5f7e6.ts.net";
+
+        SIGNUPS_ALLOWED = false;
+      };
+      environmentFile = "/var/secrets/vaultwarden/secrets.env";
+    };
+
+    zipline = {
+      enable = true;
+      environmentFiles = [ "/var/secrets/zipline/secrets.env" ];
+    };
   };
+
   system.stateVersion = "25.05";
 }
