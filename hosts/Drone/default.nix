@@ -45,8 +45,9 @@
     
     cloudflared = {
       enable = true;
-      tunnels = {
-	
+      tunnels."8af2892d-d534-4e32-b867-5b79308a99d5" = {
+	credentialsFile = "/etc/cloudflared/8af2892d-d534-4e32-b867-5b79308a99d5.json";
+	default = "http_status:418";
       };
     };
 
@@ -70,21 +71,37 @@
 	  
 	  reverse_proxy localhost:8000
         '';
-#	"example.com".extraConfig = ''
-#	  encode
 
-#          header {
+	"zipline.wo2wz.fyi".extraConfig = ''
+	  encode
+
+	  # most are configured by cloudflare already
+          header {
 #	      Strict-Transport-Security "max-age=31536000;"
 #	      X-Frame-Options "DENY"
 #	      X-Content-Type-Options "nosniff"
 #	      # nobody is gonna find this site through a search engine anyway
-#	      X-Robots-Tag "noindex, nofollow"
-#	      -Server
+	      X-Robots-Tag "noindex, nofollow"
+	      -Server
 #	      -X-Powered-By
-#	  }
+	  }
 
-#	  reverse_proxy localhost:3000
-#	'';
+	  # use cloudflare origin certs for https
+	  tls /var/secrets/caddy/wo2wz.fyi.crt /var/secrets/caddy/wo2wz.fyi.key
+
+	  reverse_proxy localhost:3000
+	'';
+
+	"wo2wz.fyi".extraConfig = ''
+	  encode
+
+	  header {
+	      X-Robots-Tag "noindex, nofollow"
+	      -Server
+	  }
+
+	  respond "not much to see here"
+	'';
       };
     };
 
@@ -109,3 +126,4 @@
 
   system.stateVersion = "25.05";
 }
+
