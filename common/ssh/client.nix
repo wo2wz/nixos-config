@@ -19,21 +19,8 @@
     ";
   };
 
-  services.openssh = {
-    enable = true;
-    ports = [ 8743 ];
-    settings = {
-      PasswordAuthentication = false;
-      KbdInteractiveAuthentication = false;
-      PermitRootLogin = "no";
-      AllowUsers = [ "wo2w" ];
-    };
-  };
-
   environment = {
     systemPackages = if config.services.desktopManager.plasma6.enable then with pkgs; [ kdePackages.ksshaskpass ] else [];
-    variables = {
-      SSH_ASKPASS_REQUIRE = "prefer";
-    };
+    variables.SSH_ASKPASS_REQUIRE = "prefer";
   };
 }

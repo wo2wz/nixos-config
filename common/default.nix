@@ -2,6 +2,8 @@
 
 {
   imports = [
+    ./ssh
+    
     ./boot.nix
     ./home-manager.nix
     ./locales.nix
