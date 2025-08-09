@@ -55,62 +55,58 @@
     cloudflared = {
       enable = true;
       tunnels."8af2892d-d534-4e32-b867-5b79308a99d5" = {
-	credentialsFile = "/etc/cloudflared/8af2892d-d534-4e32-b867-5b79308a99d5.json";
-	default = "http_status:418";
+	      credentialsFile = "/etc/cloudflared/8af2892d-d534-4e32-b867-5b79308a99d5.json";
+	      default = "http_status:418";
       };
     };
 
     caddy = {
       enable = true;
       virtualHosts = {
-	"drone.taild5f7e6.ts.net".extraConfig = ''
-	  encode
+        "drone.taild5f7e6.ts.net".extraConfig = ''
+          encode
 
-	  # most of this doesnt matter but why not
+          # most of this doesnt matter but why not
           header {
-	      Strict-Transport-Security "max-age=31536000;"
-	      X-Frame-Options "SAMEORIGIN"
-	      X-Content-Type-Options "nosniff"
-	      -Server
-	      -X-Powered-By
-	  }
+              Strict-Transport-Security "max-age=31536000;"
+              X-Frame-Options "SAMEORIGIN"
+              X-Content-Type-Options "nosniff"
+              -Server
+              -X-Powered-By
+          }
 
-	  # block connections to admin login
+          # block connections to admin login
           respond /admin/* 403
-	  
-	  reverse_proxy localhost:8000
+          
+          reverse_proxy localhost:8000
         '';
 
-	"zipline.wo2wz.fyi".extraConfig = ''
-	  encode
+        "zipline.wo2wz.fyi".extraConfig = ''
+          encode
 
-	  # most are configured by cloudflare already
+          # most headers are already configured via cloudflare
           header {
-#	      Strict-Transport-Security "max-age=31536000;"
-#	      X-Frame-Options "DENY"
-#	      X-Content-Type-Options "nosniff"
-#	      # nobody is gonna find this site through a search engine anyway
-	      X-Robots-Tag "noindex, nofollow"
-	      -Server
-#	      -X-Powered-By
-	  }
+      	      # nobody is gonna find this site through a search engine anyway
+              X-Robots-Tag "noindex, nofollow"
+              -Server
+          }
 
-	  # use cloudflare origin certs for https
-	  tls /var/secrets/caddy/wo2wz.fyi.crt /var/secrets/caddy/wo2wz.fyi.key
+          # use cloudflare origin certs for https
+          tls /var/secrets/caddy/wo2wz.fyi.crt /var/secrets/caddy/wo2wz.fyi.key
 
-	  reverse_proxy localhost:3000
-	'';
+          reverse_proxy localhost:3000
+        '';
 
-	"wo2wz.fyi".extraConfig = ''
-	  encode
+        "wo2wz.fyi".extraConfig = ''
+          encode
 
-	  header {
-	      X-Robots-Tag "noindex, nofollow"
-	      -Server
-	  }
+          header {
+              X-Robots-Tag "noindex, nofollow"
+              -Server
+          }
 
-	  respond "not much to see here"
-	'';
+          respond "not much to see here"
+        '';
       };
     };
 
