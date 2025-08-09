@@ -4,6 +4,7 @@
   imports = [
     ./hardware-configuration.nix
     
+    ../../common/ssh/server.nix
     ../../common/boot.nix
     ../../common/locales.nix
     ../../common/nix.nix
@@ -25,7 +26,15 @@
     size = 8192;
   }];
 
-  networking.hostName = "${hostName}";
+  networking = {
+    hostName = "${hostName}";
+    firewall = lib.mkForce {
+      allowedTCPPorts = [];
+      allowedTCPPortRanges = [];
+      allowedUDPPorts = [];
+      allowedUDPPortRanges = [];
+    };
+  };
 
   environment.defaultPackages = lib.mkForce [];
   
@@ -121,8 +130,8 @@
     zipline = {
       enable = true;
       settings = {
-	FEATURES_VERSION_CHECKING = "false";
-	FEATURES_THUMBNAILS_NUM_THREADS = 2;
+	      FEATURES_VERSION_CHECKING = "false";
+      	FEATURES_THUMBNAILS_NUM_THREADS = 2;
       };
       environmentFiles = [ "/var/secrets/zipline/secrets.env" ];
     };
