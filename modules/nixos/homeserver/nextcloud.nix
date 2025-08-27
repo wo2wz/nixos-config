@@ -12,7 +12,7 @@
     nextcloud = {
       enable = true;
       package = pkgs.nextcloud31;
-      hostName = "localhost:8001";
+      hostName = "localhost:8002";
       config = {
         adminuser = "wo2w";
         adminpassFile = config.sops.secrets."nextcloud/adminpass".path;

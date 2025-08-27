@@ -44,7 +44,7 @@
               -Server
           }
 
-          root ${config.services.nginx.virtualHosts."localhost:8001".root}
+          root ${config.services.nginx.virtualHosts."localhost:8002".root}
           file_server
 
           php_fastcgi unix/${config.services.phpfpm.pools.nextcloud.socket}
@@ -81,7 +81,7 @@
           # use cloudflare origin certs for https
           tls ${config.sops.secrets."caddy/wo2wz.fyi.crt".path} ${config.sops.secrets."caddy/wo2wz.fyi.key".path}
 
-          reverse_proxy localhost:3000
+          reverse_proxy localhost:8001
         '';
       };
     };
