@@ -1,14 +1,20 @@
 { config, pkgs, ... }:
 
-{
-  users.users.caddy.extraGroups = [ "nextcloud" ];
-  services = {
-    nginx.enable = false; # disable to use caddy instead
-    phpfpm.pools.nextcloud.settings = {
-      "listen.owner" = "caddy";
-      "listen.group" = "caddy";
-    };
+{  
+  services.nginx.enable = false; # disable to use caddy instead
+  users.users.nginx = {
+    group = "nginx";
+    isSystemUser = true;
+  };
+  users.groups.nginx = {};
 
+  users.users.caddy.extraGroups = [ "nextcloud" ];
+  services.phpfpm.pools.nextcloud.settings = {
+    "listen.owner" = "caddy";
+    "listen.group" = "caddy";
+  };
+
+  services = {
     nextcloud = {
       enable = true;
       package = pkgs.nextcloud31;
@@ -25,8 +31,16 @@
 
       maxUploadSize = "200G";
       extraApps = {
-        inherit (config.services.nextcloud.package.packages.apps) calendar tasks deck twofactor_webauthn;
+        inherit (config.services.nextcloud.package.packages.apps) calendar deck onlyoffice tasks twofactor_webauthn;
       };
+    };    
+
+    # onlyoffice document server for rich document editing
+    onlyoffice = {
+      enable = true;
+      hostname = "localhost";
+      port = 8003;
+      jwtSecretFile = config.sops.secrets."onlyoffice/jwt".path;
     };
   };
 }

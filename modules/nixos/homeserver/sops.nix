@@ -26,6 +26,8 @@
 
       "nextcloud/adminpass" = {};
 
+      "onlyoffice/jwt" = {};
+
       "vaultwarden/secrets.env".restartUnits = [ "vaultwarden.service" ];
 
       "zipline/secrets.env".restartUnits = [ "zipline.service" ];

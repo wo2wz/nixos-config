@@ -1,21 +1,45 @@
-{ config, ... }:
+{ config, pkgs, ... }:
 
 {
   services = {
     caddy = {
       enable = true;
+      package = pkgs.caddy.withPlugins {
+        plugins = [ "github.com/WeidiDeng/caddy-cloudflare-ip@v0.0.0-20231130002422-f53b62aa13cb"];
+        hash = "sha256-mtKyPOEY6qK1/Uz4LQfzqBMxFnfH1vLfvxyo4t4nXck=";
+      };
+      extraConfig = ''
+        (cloudflare-tls) {
+            tls ${config.sops.secrets."caddy/wo2wz.fyi.crt".path} ${config.sops.secrets."caddy/wo2wz.fyi.key".path}
+        }
+
+        (default-settings) {
+            encode
+
+            header {
+                Strict-Transport-Security "max-age=15552000;"
+                X-Frame-Options "SAMEORIGIN"
+                X-Content-Type-Options "nosniff"
+                X-Robots-Tag "noindex, nofollow"
+                -Server
+                -X-Powered-By
+            }
+        }
+      '';
+      globalConfig = ''
+        grace_period 30s
+        servers {
+            client_ip_headers CF-Connecting-Ip X-Forwarded-For
+            trusted_proxies cloudflare {
+                interval 7d
+                timeout 15s
+            }
+            trusted_proxies_strict
+        }
+      '';
       virtualHosts = {
         "drone.taild5f7e6.ts.net".extraConfig = ''
-          encode
-
-          # most of this doesnt matter but why not
-          header {
-              Strict-Transport-Security "max-age=31536000;"
-              X-Frame-Options "SAMEORIGIN"
-              X-Content-Type-Options "nosniff"
-              -Server
-              -X-Powered-By
-          }
+          import default-settings
 
           # block connections to admin login
           respond /admin/* 403
@@ -24,25 +48,14 @@
         '';
 
         "wo2wz.fyi".extraConfig = ''
-          encode
-
-          header {
-              X-Robots-Tag "noindex, nofollow"
-              -Server
-          }
+          import default-settings
+          import cloudflare-tls
 
           respond "not much to see here"
         '';
 
         "nextcloud.wo2wz.fyi".extraConfig = ''
-          encode
-
-          tls ${config.sops.secrets."caddy/wo2wz.fyi.crt".path} ${config.sops.secrets."caddy/wo2wz.fyi.key".path}
-
-          header {
-              X-Robots-Tag "noindex, nofollow"
-              -Server
-          }
+          import default-settings
 
           root ${config.services.nginx.virtualHosts."localhost:8002".root}
           file_server
@@ -61,6 +74,7 @@
             path /.* /autotest* /occ* /issue* /indie* /db_* /console*
             not path /.well-known/*
           }
+
           respond @forbidden 403
 
           # make .mjs javascript work for the functionality of some buttons/apps
@@ -68,18 +82,23 @@
           header @mjs Content-Type application/javascript
         '';
 
-        "zipline.wo2wz.fyi".extraConfig = ''
-          encode
+        "onlyoffice.wo2wz.fyi".extraConfig = ''
+          import default-settings
+          import cloudflare-tls
 
-          # most headers are already configured via cloudflare
-          header {
-              # nobody is gonna find this site through a search engine anyway
-              X-Robots-Tag "noindex, nofollow"
-              -Server
+          @blockinternal {
+            path /internal/*
+            path /info/*
+            not remote_ip 127.0.0.1
           }
+          respond @blockinternal 403
 
-          # use cloudflare origin certs for https
-          tls ${config.sops.secrets."caddy/wo2wz.fyi.crt".path} ${config.sops.secrets."caddy/wo2wz.fyi.key".path}
+          reverse_proxy localhost:8003 
+        '';
+
+        "zipline.wo2wz.fyi".extraConfig = ''
+          import default-settings
+          import cloudflare-tls
 
           reverse_proxy localhost:8001
         '';
