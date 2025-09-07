@@ -31,7 +31,7 @@
 
       maxUploadSize = "200G";
       extraApps = {
-        inherit (config.services.nextcloud.package.packages.apps) calendar deck onlyoffice tasks twofactor_webauthn;
+        inherit (config.services.nextcloud.package.packages.apps) calendar deck onlyoffice tasks twofactor_webauthn user_oidc;
       };
     };    
 

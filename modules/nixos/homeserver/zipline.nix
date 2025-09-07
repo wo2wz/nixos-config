@@ -13,6 +13,7 @@
 
       FEATURES_VERSION_CHECKING = "false";
       FEATURES_THUMBNAILS_NUM_THREADS = 2;
+      FEATURES_OAUTH_REGISTRATION = "true";
     };
     environmentFiles = [ config.sops.secrets."zipline/secrets.env".path ];
   };
