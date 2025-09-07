@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ./authentik.nix
     ./caddy.nix
     ./cloudflared.nix
     ./nextcloud.nix

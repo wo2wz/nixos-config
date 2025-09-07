@@ -6,7 +6,7 @@
       enable = true;
       package = pkgs.caddy.withPlugins {
         plugins = [ "github.com/WeidiDeng/caddy-cloudflare-ip@v0.0.0-20231130002422-f53b62aa13cb"];
-        hash = "sha256-mtKyPOEY6qK1/Uz4LQfzqBMxFnfH1vLfvxyo4t4nXck=";
+        hash = "sha256-UhQOGV0149dK4u9mr449aohfG3KKwSDRW9WrvT0uOKI=";
       };
       extraConfig = ''
         (cloudflare-tls) {
@@ -52,6 +52,13 @@
           import cloudflare-tls
 
           respond "not much to see here"
+        '';
+
+        "authentik.wo2wz.fyi".extraConfig = ''
+          import default-settings
+          import cloudflare-tls
+
+          reverse_proxy localhost:9000
         '';
 
         "nextcloud.wo2wz.fyi".extraConfig = ''

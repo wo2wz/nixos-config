@@ -11,6 +11,8 @@
     age.keyFile = "/root/.config/sops/age/keys.txt";
 
     secrets = {
+      "authentik/secrets.env".restartUnits = [ "authentik.service" ];
+
       "caddy/wo2wz.fyi.crt" = {
         owner = "caddy";
         group = "caddy";

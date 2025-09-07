@@ -6,6 +6,8 @@
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-pin.url = "github:NixOS/nixpkgs/336eda0d07dc5e2be1f923990ad9fdb6bc8e28e3";
 
+    authentik-nix.url = "github:nix-community/authentik-nix";
+
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
@@ -42,23 +44,12 @@
     };
   };
 
-  outputs =
-    {
-      self,
-      nixpkgs,
-      nixpkgs-unstable,
-      nixpkgs-pin,
-      nixos-hardware,
-      home-manager,
-      stylix,
-      sops-nix,
-      ...
-    }@inputs:
+  outputs = inputs@{ ... }:
     let      
       system = "x86_64-linux";
       nixosSystem =
         hostName:
-        nixpkgs.lib.nixosSystem {
+        inputs.nixpkgs.lib.nixosSystem {
           specialArgs = { inherit hostName inputs system; };
           modules = [ ./hosts/${hostName} ];
         };
