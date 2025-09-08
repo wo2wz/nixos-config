@@ -103,6 +103,13 @@
           reverse_proxy localhost:8003 
         '';
 
+        "uptime-kuma.wo2wz.fyi".extraConfig = ''
+          import default-settings
+          import cloudflare-tls
+
+          reverse_proxy localhost:8005
+        '';
+
         "zipline.wo2wz.fyi".extraConfig = ''
           import default-settings
           import cloudflare-tls

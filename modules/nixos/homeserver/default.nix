@@ -7,6 +7,7 @@
     ./cloudflared.nix
     ./nextcloud.nix
     ./sops.nix
+    ./uptime-kuma.nix
     ./vaultwarden.nix
     ./zipline.nix
   ];
