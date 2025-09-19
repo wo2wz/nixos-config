@@ -8,8 +8,7 @@
     ../../common/desktop
     ../../modules/common
     ../../modules/nixos
-    
-    ../../common/kernel.nix
+    ../../modules/nixos/mumble.nix
   ];
 
   environment.systemPackages = [ pkgs.kdePackages.krfb ];
