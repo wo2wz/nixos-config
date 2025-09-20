@@ -28,7 +28,10 @@
 
       "nextcloud/adminpass" = {};
 
-      "onlyoffice/jwt" = {};
+      "onlyoffice/jwt" = {
+        owner = "onlyoffice";
+        group = "onlyoffice";
+      };
 
       "vaultwarden/secrets.env".restartUnits = [ "vaultwarden.service" ];
 
