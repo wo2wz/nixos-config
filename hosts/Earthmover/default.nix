@@ -11,7 +11,7 @@
     ../../modules/nixos/mumble.nix
   ];
 
-  environment.systemPackages = [ pkgs.kdePackages.krfb ];
+  environment.systemPackages = [ pkgs.kdePackages.krfb pkgs.alsa-oss ];
 
   services.cloudflared = {
     enable = true;
