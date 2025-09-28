@@ -14,12 +14,12 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/75194a0f-7df7-4a6e-bf58-3bcf9bc278db";
+    { device = "/dev/disk/by-id/nvme-WD_BLACK_SN7100_2TB_252830800317-part2";
       fsType = "ext4";
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/7235-4054";
+    { device = "/dev/disk/by-id/nvme-WD_BLACK_SN7100_2TB_252830800317-part1";
       fsType = "vfat";
       options = [ "fmask=0022" "dmask=0022" ];
     };
