@@ -22,6 +22,23 @@
     "/swap".options = [ "noatime" ];
   };
 
+  # config for ZFS external storage
+  boot.supportedFilesystems = [ "zfs" ];
+  networking.hostId = "58bae81c";
+  fileSystems = {
+    "/mnt/external" = {
+      device = "zpool-mirror";
+      fsType = "zfs";
+    };
+    
+    "/mnt/external/backup" = {
+      device = "zpool-mirror/backup";
+      fsType = "zfs";
+    };
+  };
+
+  services.zfs.autoScrub.enable = true;
+
   swapDevices = [{
     device = "/swap/swapfile";
     size = 8192;
