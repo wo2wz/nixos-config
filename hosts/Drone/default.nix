@@ -35,6 +35,19 @@
       device = "zpool-mirror/backup";
       fsType = "zfs";
     };
+
+    "/mnt/external/storage" = {
+      device = "zpool-mirror/storage";
+      fsType = "zfs";
+    };
+
+    # bind mounts for file storage dirs from external storage
+    "/var/lib/nextcloud/data/2fc6e1af776402040d95e1d5adc3babe4928587e84170c882815c808b472b3fa" = {
+      depends = [ "/mnt/external/storage" ];
+      device = "/mnt/external/storage/nextcloud/data/2fc6e1af776402040d95e1d5adc3babe4928587e84170c882815c808b472b3fa";
+      fsType = "none";
+      options = [ "bind" ];
+    };
   };
 
   services.zfs.autoScrub.enable = true;
