@@ -10,6 +10,7 @@
     enable = true;
     settings = {
       CORE_PORT = 8001;
+      DATASOURCE_LOCAL_DIRECTORY = "/mnt/external/storage/zipline/uploads";
 
       FEATURES_VERSION_CHECKING = "false";
       FEATURES_THUMBNAILS_NUM_THREADS = 2;
