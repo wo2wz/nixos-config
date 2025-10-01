@@ -1,4 +1,4 @@
-{ inputs, config, pkgs, ... }:
+{ hostName, inputs, config, lib, pkgs, ... }:
 
 {
   # compositor: niri
@@ -21,6 +21,14 @@
     xwayland-satellite # necessary for xwayland on niri
     (flameshot.override { enableWlrSupport = true; }) # screenshot program
   ];
+
+  xdg.portal.config = {
+    niri = {
+      default = "gtk";
+      "org.freedesktop.impl.portal.ScreenCast" = "gnome";
+      "org.freedesktop.impl.portal.Secret" = "gnome-keyring";
+    };
+  };
 
   home-manager.users.wo2w = {
     xdg.configFile."wpaperd/config.toml".text = ''
@@ -59,6 +67,8 @@
             "Super+Alt+E".action.quit.skip-confirmation = true;
             "Super+Alt+Shift+S".action.spawn = "poweroff";
             "Super+Alt+Shift+R".action.spawn = "reboot";
+
+            "Super+Alt+F".action.fullscreen-window = {};
 
             "Mod+O".action.open-overview = {};
             "Mod+V".action.toggle-window-floating = {};
@@ -288,7 +298,7 @@
             { command = [ "wpaperd" "-d" ]; }
           ];
 
-          workspaces = {
+          workspaces = if "${hostName}" == "Earthmover" then {
             "01-DP-1-misc" = {
               name = "Miscellaneous";
               open-on-output = "DP-1";
@@ -305,9 +315,15 @@
               name = "Miscellaneous 2";
               open-on-output = "DP-2";
             };
-          };
+          }
+          else if "${hostName}" == "Swordsmachine" then {
+            "01-misc".name = "Miscellaneous";
+            "02-fullscreen".name = "Fullscreen";
+            "03-game".name = "Gaming";
+          }
+          else {};
 
-          window-rules = [
+          window-rules = if "${hostName}" == "Earthmover" then [
             {
               matches = [{ title = "^Bitwarden$"; }];
               block-out-from = "screen-capture";
@@ -336,10 +352,12 @@
                 { title = "^Steam$"; }
               ];
               open-on-workspace = "Gaming";
+              open-maximized = true;
             }
             {
               matches = [{ app-id = "heroic"; }];
               open-on-workspace = "Gaming";
+              open-maximized = true;
             }
             {
               matches = [{ app-id = "org.prismlauncher.PrismLauncher"; }];
@@ -348,23 +366,94 @@
             {
               matches = [{ app-id = "vesktop"; }];
               open-on-workspace = "Gaming";
+              open-maximized = true;
             }
-            # Text Editing 
             # Fullscreen (DP-2)
             {
               matches = [{ app-id = "librewolf"; }];
               open-on-workspace = "Fullscreen";
+              open-maximized = true;
             }
             {
               matches = [{ app-id = "spotify"; }];
               open-on-workspace = "Fullscreen";
+              open-maximized = true;
             }
             # Miscellaneous 2 (DP-2)
             {
               matches = [{ app-id = "com.dec05eba.gpu_screen_recorder"; }];
               open-on-workspace = "Miscellaneous 2";
             }
-          ];
+          ]
+          else if "${hostName}" == "Swordsmachine" then [
+            {
+              matches = [{ title = "^Bitwarden$"; }];
+              block-out-from = "screen-capture";
+            }
+            {
+              matches = [{ app-id = "^org.kde.polkit-kde-authentication-agent-1$"; }];
+              block-out-from = "screen-capture";
+              open-floating = true;
+            }
+            # put steam notifications in the bottom right
+            {
+              matches = [
+                { app-id = "steam"; }
+                { title = "^notificationtoasts_\d+_desktop$"; }
+              ];
+              default-floating-position = {
+                x = 10;
+                y = 10;
+                relative-to = "bottom-right";
+              };
+            }
+            # Miscellaneous
+            {
+              matches = [{ app-id = "com.dec05eba.gpu_screen_recorder"; }];
+              open-on-workspace = "Miscellaneous";
+              open-floating = false;
+            }
+            # Gaming
+            {
+              matches = [
+                { app-id = "steam"; }
+                { title = "^Steam$"; }
+              ];
+              open-on-workspace = "Gaming";
+              open-maximized = true;
+            }
+            {
+              matches = [{ app-id = "heroic"; }];
+              open-on-workspace = "Gaming";
+              open-maximized = true;
+            }
+            {
+              matches = [{ app-id = "org.prismlauncher.PrismLauncher"; }];
+              open-on-workspace = "Gaming";
+            }
+            {
+              matches = [{ app-id = "vesktop"; }];
+              open-on-workspace = "Gaming";
+              open-maximized = true;
+            }
+            # Fullscreen
+            {
+              matches = [{ app-id = "librewolf"; }];
+              open-on-workspace = "Fullscreen";
+              open-maximized = true;
+            }
+            {
+              matches = [{ app-id = "spotify"; }];
+              open-on-workspace = "Fullscreen";
+              open-maximized = true;
+            }
+            {
+              matches = [{ app-id = "org.kde.okular"; }];
+              open-on-workspace = "Fullscreen";
+              open-maximized = true;
+            }
+          ]
+          else [];
         };
       };
 

@@ -9,7 +9,7 @@
     ../../modules/common
     ../../modules/nixos
     
-    ../../modules/common/niri.nix
+    ../../modules/common/niri
 
     inputs.nixos-hardware.nixosModules.dell-xps-15-9570-nvidia
   ];
