@@ -5,9 +5,14 @@
     caddy = {
       enable = true;
       package = pkgs.caddy.withPlugins {
-        plugins = [ "github.com/WeidiDeng/caddy-cloudflare-ip@v0.0.0-20231130002422-f53b62aa13cb"];
-        hash = "sha256-UhQOGV0149dK4u9mr449aohfG3KKwSDRW9WrvT0uOKI=";
+        plugins = [
+          "github.com/WeidiDeng/caddy-cloudflare-ip@v0.0.0-20231130002422-f53b62aa13cb"
+          "github.com/tailscale/caddy-tailscale@v0.0.0-20250915161136-32b202f0a953"
+        ];
+        hash = "sha256-icldgfR6CidNdsM/AcpaV484hrljGxj5KiAqTOjlKgg=";
       };
+      environmentFile = config.sops.secrets."caddy/secrets.env".path;
+
       extraConfig = ''
         (cloudflare-tls) {
             tls ${config.sops.secrets."caddy/wo2wz.fyi.crt".path} ${config.sops.secrets."caddy/wo2wz.fyi.key".path}
@@ -36,14 +41,22 @@
             }
             trusted_proxies_strict
         }
+
+        tailscale {
+            auth_key {env.CADDY_TAILSCALE_AUTH_KEY}
+            state_dir ${config.services.caddy.dataDir}/caddy-tailscale
+        }
       '';
+
       virtualHosts = {
-        "drone.taild5f7e6.ts.net".extraConfig = ''
+        "vaultwarden.taild5f7e6.ts.net".extraConfig = ''
           import default-settings
+
+          bind tailscale/vaultwarden
 
           # block connections to admin login
           respond /admin/* 403
-          
+
           reverse_proxy localhost:8000
         '';
 

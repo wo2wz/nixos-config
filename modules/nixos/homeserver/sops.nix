@@ -13,6 +13,8 @@
     secrets = {
       "authentik/secrets.env".restartUnits = [ "authentik.service" ];
 
+      "caddy/secrets.env" = {};
+
       "caddy/wo2wz.fyi.crt" = {
         owner = "caddy";
         group = "caddy";

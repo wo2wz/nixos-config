@@ -5,7 +5,7 @@
     enable = true;
     backupDir = "/var/backups/vaultwarden";
     config = {
-      DOMAIN = "https://drone.taild5f7e6.ts.net";
+      DOMAIN = "https://vaultwarden.taild5f7e6.ts.net";
 
       SIGNUPS_ALLOWED = false;
     };
