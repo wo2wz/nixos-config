@@ -22,6 +22,16 @@
     "/swap".options = [ "noatime" ];
   };
 
+  services.btrfs.autoScrub = {
+    enable = true;
+    fileSystems = [ "/" ];
+  };
+
+  swapDevices = [{
+    device = "/swap/swapfile";
+    size = 8192;
+  }];
+
   # config for ZFS external storage
   boot.supportedFilesystems = [ "zfs" ];
   networking.hostId = "58bae81c";
@@ -51,11 +61,6 @@
   };
 
   services.zfs.autoScrub.enable = true;
-
-  swapDevices = [{
-    device = "/swap/swapfile";
-    size = 8192;
-  }];
 
   networking = {
     hostName = "${hostName}";
