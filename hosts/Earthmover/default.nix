@@ -11,17 +11,7 @@
     ../../modules/nixos/mumble.nix
   ];
 
-  environment.systemPackages = [ pkgs.kdePackages.krfb pkgs.alsa-oss ];
-
-  services.cloudflared = {
-    enable = true;
-    tunnels = {
-      "ba7422f0-361f-4fd8-9a5a-e10bc82662e5" = {
-        credentialsFile = "/home/wo2w/.cloudflared/ba7422f0-361f-4fd8-9a5a-e10bc82662e5.json";
-        default = "http_status:418";
-      };
-    };
-  };
+  environment.systemPackages = [ pkgs.alsa-oss ];
 
   home-manager.users.wo2w = {
     imports = [
