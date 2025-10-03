@@ -15,6 +15,7 @@ in {
   };
   environment.systemPackages = with pkgs; [
     gamescope # screen resolution controller for games that have bugs when changing resolution
+    alsa-oss # to fix minecraft audio jank
     (prismlauncher.override {
       # Change Java runtimes available to Prism Launcher
       jdks = [

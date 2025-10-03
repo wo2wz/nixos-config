@@ -11,8 +11,6 @@
     ../../modules/nixos/mumble.nix
   ];
 
-  environment.systemPackages = [ pkgs.alsa-oss ];
-
   home-manager.users.wo2w = {
     imports = [
       ../../modules/home
