@@ -11,6 +11,24 @@
     ../../modules/nixos/mumble.nix
   ];
 
+  fileSystems = {
+    "/mnt/internal-nvme" = {
+      device = "/dev/disk/by-id/nvme-XF-1TB_2280_9I50708000130_1";
+      fsType = "btrfs";
+      options = [ "compress=zstd" ];
+    };
+
+    "/mnt/internal-nvme/steam" = {
+      device = "/dev/disk/by-id/nvme-XF-1TB_2280_9I50708000130_1";
+      fsType = "btrfs";
+      options = [
+        "subvol=steam"
+        "compress=zstd"
+        "noatime"
+      ];
+    };
+  };
+
   home-manager.users.wo2w = {
     imports = [
       ../../modules/home
