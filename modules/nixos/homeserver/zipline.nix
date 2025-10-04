@@ -3,6 +3,15 @@
 {
   sops.secrets."zipline/secrets.env".restartUnits = [ "zipline.service" ];
 
+  services.caddy.virtualHosts."zipline.wo2wz.fyi".extraConfig =
+    assert config.services.caddy.enable;
+    ''
+      import default-settings
+      import cloudflare-tls
+
+      reverse_proxy localhost:8001
+    '';
+
   users.users.zipline = {
     group = "zipline";
     isSystemUser = true;

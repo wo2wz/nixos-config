@@ -17,6 +17,8 @@
   };
 
   services = {
+    tailscale.permitCertUid = "caddy";
+
     caddy = {
       enable = true;
       package = pkgs.caddy.withPlugins {
@@ -63,89 +65,12 @@
         }
       '';
 
-      virtualHosts = {
-        "vaultwarden.taild5f7e6.ts.net".extraConfig = ''
-          import default-settings
+      virtualHosts."wo2wz.fyi".extraConfig = ''
+        import default-settings
+        import cloudflare-tls
 
-          bind tailscale/vaultwarden
-
-          # block connections to admin login
-          respond /admin/* 403
-
-          reverse_proxy localhost:8000
-        '';
-
-        "wo2wz.fyi".extraConfig = ''
-          import default-settings
-          import cloudflare-tls
-
-          respond "not much to see here"
-        '';
-
-        "authentik.wo2wz.fyi".extraConfig = ''
-          import default-settings
-          import cloudflare-tls
-
-          reverse_proxy localhost:9000
-        '';
-
-        "nextcloud.wo2wz.fyi".extraConfig = ''
-          import default-settings
-
-          root ${config.services.nginx.virtualHosts."localhost:8002".root}
-          file_server
-
-          php_fastcgi unix/${config.services.phpfpm.pools.nextcloud.socket}
-
-          redir /.well-known/carddav /remote.php/dav 301
-          redir /.well-known/caldav /remote.php/dav 301
-          redir /.well-known/webfinger /index.php/webfinger 301
-          redir /.well-known/nodeinfo /index.php/nodeinfo 301
-          redir /.well-known/* /index.php{uri} 301
-          redir /remote/* /remote.php{uri} 301
-
-          @forbidden {
-            path /build/* /tests/* /config/* /lib/* /3rdparty/* /templates/* /data/*
-            path /.* /autotest* /occ* /issue* /indie* /db_* /console*
-            not path /.well-known/*
-          }
-
-          respond @forbidden 403
-
-          # make .mjs javascript work for the functionality of some buttons/apps
-          @mjs path *.mjs
-          header @mjs Content-Type application/javascript
-        '';
-
-        "onlyoffice.wo2wz.fyi".extraConfig = ''
-          import default-settings
-          import cloudflare-tls
-
-          @blockinternal {
-            path /internal/*
-            path /info/*
-            not remote_ip 127.0.0.1
-          }
-          respond @blockinternal 403
-
-          reverse_proxy localhost:8003 
-        '';
-
-        "uptime-kuma.wo2wz.fyi".extraConfig = ''
-          import default-settings
-          import cloudflare-tls
-
-          reverse_proxy localhost:8005
-        '';
-
-        "zipline.wo2wz.fyi".extraConfig = ''
-          import default-settings
-          import cloudflare-tls
-
-          reverse_proxy localhost:8001
-        '';
-      };
+        respond "not much to see here"
+      '';
     };
-    tailscale.permitCertUid = "caddy"; # allow caddy to manage tailscale ssl certs
   };
 }
