@@ -9,6 +9,15 @@
 
   sops.secrets."authentik/secrets.env".restartUnits = [ "authentik.service" ];
 
+  services.caddy.virtualHosts."authentik.wo2wz.fyi".extraConfig = 
+    assert config.services.caddy.enable;
+    ''
+      import default-settings
+      import cloudflare-tls
+
+      reverse_proxy localhost:9000
+    '';
+
   services.authentik = {
     enable = true;
     environmentFile = config.sops.secrets."authentik/secrets.env".path;
