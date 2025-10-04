@@ -11,6 +11,7 @@
     ../../common/users.nix
 
     ../../modules/nixos/bash.nix
+    ../../modules/nixos/git.nix
     ../../modules/nixos/tailscale.nix
     ../../modules/nixos/homeserver
   ];
@@ -73,17 +74,6 @@
   };
 
   environment.defaultPackages = lib.mkForce [];
-  
-  programs.git = {
-    enable = true;
-    config = {
-      user = {
-        name = "wo2wz";
-        email = "189177184+wo2wz@users.noreply.github.com";
-      };
-      safe.directory = "/etc/nixos";
-    };
-  };
 
   services = {
     scx.scheduler = lib.mkForce "scx_rusty";
