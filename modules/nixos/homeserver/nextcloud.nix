@@ -1,6 +1,15 @@
 { config, pkgs, ... }:
 
 {  
+  sops.secrets = {
+    "nextcloud/adminpass" = {};
+
+    "onlyoffice/jwt" = {
+      owner = "onlyoffice";
+      group = "onlyoffice";
+    };
+  };
+
   services.nginx.enable = false; # disable to use caddy instead
   users.users.nginx = {
     group = "nginx";
@@ -27,7 +36,7 @@
       };
       settings = {
         trusted_domains = [ "nextcloud.wo2wz.fyi" ];
-        trusted_proxies = [ "127.0.0.1" ];
+        trusted_proxies = [ "127.0.0.1" "::1" ];
       };
 
       maxUploadSize = "200G";

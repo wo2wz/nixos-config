@@ -1,6 +1,11 @@
 { config, pkgs, ... }:
 
 {
+  sops.secrets = {
+    "restic/password" = {};
+    "restic/rclone/offsite" = {};
+  };
+
   # for use as rclone backend
   environment.systemPackages = [ pkgs.rclone ];
 

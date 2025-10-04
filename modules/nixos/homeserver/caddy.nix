@@ -1,6 +1,21 @@
 { config, pkgs, ... }:
 
 {
+  sops.secrets = {
+    "caddy/secrets.env" = {};
+
+    "caddy/wo2wz.fyi.crt" = {
+      owner = "caddy";
+      group = "caddy";
+      reloadUnits = [ "caddy.service" ];
+    };
+    "caddy/wo2wz.fyi.key" = {
+      owner = "caddy";
+      group = "caddy";
+      reloadUnits = [ "caddy.service" ];
+    };
+  };
+
   services = {
     caddy = {
       enable = true;
