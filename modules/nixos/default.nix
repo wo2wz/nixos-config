@@ -2,10 +2,8 @@
 
 {
   imports = [
-    ./bash.nix
-    ./gaming.nix
-    ./kde.nix
-    # ./niri.nix
-    ./tailscale.nix
+    ./programs
+    ./services
+    ./system
   ];
 }

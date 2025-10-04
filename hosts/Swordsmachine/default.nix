@@ -4,12 +4,13 @@
   imports = [
     ./hardware-configuration.nix
 
-    ../../common
-    ../../common/desktop
     ../../modules/common
-    ../../modules/nixos
-    
-    ../../modules/common/niri
+
+    ../../modules/nixos/programs
+    ../../modules/nixos/programs/niri.nix
+    ../../modules/nixos/services/openssh.nix
+    ../../modules/nixos/services/tailscale.nix
+    ../../modules/nixos/system
 
     inputs.nixos-hardware.nixosModules.dell-xps-15-9570-nvidia
   ];

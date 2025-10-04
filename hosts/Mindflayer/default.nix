@@ -2,9 +2,9 @@
 
 {
   imports = [
-    ../../common/locales.nix
-    ../../common/nix.nix
-    ../../common/users.nix
+    ../../modules/common/locales.nix
+    ../../modules/common/nix.nix
+    ../../modules/common/users.nix
 
     inputs.nixos-avf.nixosModules.avf
   ];

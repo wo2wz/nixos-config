@@ -1,8 +1,12 @@
-{ config, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   imports = [
-    ./stylix.nix
-    ./yubikey.nix
+    ./boot.nix
+    ./default-packages.nix
+    ./locales.nix
+    ./networking.nix
+    ./nix.nix
+    ./users.nix
   ];
 }
