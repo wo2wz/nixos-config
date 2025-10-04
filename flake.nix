@@ -8,6 +8,11 @@
 
     authentik-nix.url = "github:nix-community/authentik-nix";
 
+    nixos-avf = {
+      url = "github:nix-community/nixos-avf";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
     home-manager = {
@@ -43,8 +48,8 @@
   };
 
   outputs = inputs@{ ... }:
-    let      
-      system = "x86_64-linux";
+    let
+      system = inputs.nixpkgs.lib.mkDefault "x86_64-linux";
       nixosSystem =
         hostName:
         inputs.nixpkgs.lib.nixosSystem {
@@ -56,6 +61,7 @@
         Swordsmachine = nixosSystem "Swordsmachine";
         Earthmover = nixosSystem "Earthmover";
         Drone = nixosSystem "Drone";
+        Mindflayer = nixosSystem "Mindflayer";
       };
   };
 }
