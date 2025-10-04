@@ -1,6 +1,8 @@
 { config, ... }:
 
 {
+  sops.secrets."cloudflared/8af2892d-d534-4e32-b867-5b79308a99d5.json" = {};
+
   services.cloudflared = {
     enable = true;
     tunnels."8af2892d-d534-4e32-b867-5b79308a99d5" = {

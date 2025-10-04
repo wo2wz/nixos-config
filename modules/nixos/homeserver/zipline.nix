@@ -1,6 +1,8 @@
 { config, ... }:
 
 {
+  sops.secrets."zipline/secrets.env".restartUnits = [ "zipline.service" ];
+
   users.users.zipline = {
     group = "zipline";
     isSystemUser = true;

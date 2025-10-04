@@ -9,38 +9,5 @@
     validateSopsFiles = false;
 
     age.keyFile = "/root/.config/sops/age/keys.txt";
-
-    secrets = {
-      "authentik/secrets.env".restartUnits = [ "authentik.service" ];
-
-      "caddy/secrets.env" = {};
-
-      "caddy/wo2wz.fyi.crt" = {
-        owner = "caddy";
-        group = "caddy";
-        reloadUnits = [ "caddy.service" ];
-      };
-      "caddy/wo2wz.fyi.key" = {
-        owner = "caddy";
-        group = "caddy";
-        reloadUnits = [ "caddy.service" ];
-      };
-
-      "cloudflared/8af2892d-d534-4e32-b867-5b79308a99d5.json" = {};
-
-      "nextcloud/adminpass" = {};
-
-      "onlyoffice/jwt" = {
-        owner = "onlyoffice";
-        group = "onlyoffice";
-      };
-
-      "restic/password" = {};
-      "restic/rclone/offsite" = {};
-
-      "vaultwarden/secrets.env".restartUnits = [ "vaultwarden.service" ];
-
-      "zipline/secrets.env".restartUnits = [ "zipline.service" ];
-    };
   };
 }

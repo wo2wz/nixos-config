@@ -1,6 +1,8 @@
 { config, ... }:
 
 {
+  sops.secrets."vaultwarden/secrets.env".restartUnits = [ "vaultwarden.service" ];
+
   services.vaultwarden = {
     enable = true;
     backupDir = "/var/backups/vaultwarden";
