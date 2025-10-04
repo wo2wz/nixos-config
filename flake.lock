@@ -341,6 +341,26 @@
         "type": "github"
       }
     },
+    "nixos-avf": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1758048506,
+        "narHash": "sha256-I7cLckLwnppaqoUFvTrgGKDevNnIn3qV/3ELxetm6jk=",
+        "owner": "nix-community",
+        "repo": "nixos-avf",
+        "rev": "1b7bf91cef5e3aeada4bc81977eb12b71585b45c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "nixos-avf",
+        "type": "github"
+      }
+    },
     "nixos-hardware": {
       "locked": {
         "lastModified": 1759261527,
@@ -556,6 +576,7 @@
         "authentik-nix": "authentik-nix",
         "home-manager": "home-manager",
         "niri": "niri",
+        "nixos-avf": "nixos-avf",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-pin": "nixpkgs-pin",
