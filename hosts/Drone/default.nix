@@ -4,16 +4,13 @@
   imports = [
     ./hardware-configuration.nix
     
-    ../../common/ssh/server.nix
-    ../../common/boot.nix
-    ../../common/locales.nix
-    ../../common/nix.nix
-    ../../common/users.nix
+    ../../modules/common
 
-    ../../modules/nixos/bash.nix
-    ../../modules/nixos/git.nix
-    ../../modules/nixos/tailscale.nix
-    ../../modules/nixos/homeserver
+    ../../modules/nixos/programs/bash.nix
+    ../../modules/nixos/programs/git.nix
+    ../../modules/nixos/services/openssh.nix
+    ../../modules/nixos/services/tailscale.nix
+    ../../modules/nixos/services/homeserver
   ];
   
   fileSystems = {
@@ -75,15 +72,11 @@
 
   environment.defaultPackages = lib.mkForce [];
 
-  services = {
-    scx.scheduler = lib.mkForce "scx_rusty";
-
-    # for cloudflare browser ssh
-    openssh.settings.Macs = [
-        "hmac-sha2-512"
-        "hmac-sha2-256"
-    ];
-  };
+  # for cloudflare browser ssh
+  services.openssh.settings.Macs = [
+    "hmac-sha2-512"
+    "hmac-sha2-256"
+  ];
 
   system.stateVersion = "25.05";
 }

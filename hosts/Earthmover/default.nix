@@ -4,11 +4,9 @@
   imports = [
     ./hardware-configuration.nix
 
-    ../../common
-    ../../common/desktop
     ../../modules/common
+    
     ../../modules/nixos
-    ../../modules/nixos/mumble.nix
   ];
 
   fileSystems = {
