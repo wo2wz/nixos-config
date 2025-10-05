@@ -17,8 +17,6 @@
   };
 
   services = {
-    tailscale.permitCertUid = "caddy";
-
     caddy = {
       enable = true;
       package = pkgs.caddy.withPlugins {

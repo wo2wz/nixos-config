@@ -3,7 +3,7 @@
 {
   sops.secrets."vaultwarden/secrets.env".restartUnits = [ "vaultwarden.service" ];
 
-  services.caddy.virtualHosts."vaultwarden.taild5f7e6.net".extraConfig =
+  services.caddy.virtualHosts."vaultwarden.taild5f7e6.ts.net".extraConfig =
     assert config.services.caddy.enable;
     ''
       import default-settings
