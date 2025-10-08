@@ -6,8 +6,8 @@
     "restic/rclone/offsite" = {};
   };
 
-  # for use as rclone backend
-  environment.systemPackages = [ pkgs.rclone ];
+  # for use as restic backend
+#  environment.systemPackages = [ pkgs.rclone ];
 
   systemd.services.db-dump = {
     wantedBy = [ "restic-backups-main.service" "restic-backups-offsite.service" ];
@@ -18,6 +18,8 @@
 
       ${pkgs.sqlite}/bin/sqlite3 /var/lib/vaultwarden/db.sqlite3 ".backup /var/backups/db-backup/vaultwarden.sqlite3"
       ${pkgs.sqlite}/bin/sqlite3 /var/lib/uptime-kuma/kuma.db ".backup /var/backups/db-backup/kuma.db"
+      ${pkgs.sqlite}/bin/sqlite3 /var/lib/nextcloud/data/nextcloud.db ".backup /var/backups/db-backup/nextcloud.db"
+      ${pkgs.sqlite}/bin/sqlite3 /var/lib/ntfy-sh/user.db ".backup /var/backups/db-backup/ntfy-user.db"
 
       ${pkgs.sudo}/bin/sudo -u authentik -- ${pkgs.postgresql}/bin/pg_dump > /var/backups/db-backup/dump-authentik
       ${pkgs.sudo}/bin/sudo -u onlyoffice -- ${pkgs.postgresql}/bin/pg_dump > /var/backups/db-backup/dump-onlyoffice
