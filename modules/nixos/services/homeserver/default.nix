@@ -6,6 +6,7 @@
     ./caddy.nix
     ./cloudflared.nix
     ./nextcloud.nix
+    ./ntfy.nix
     ./restic.nix
     ./sops.nix
     ./uptime-kuma.nix
