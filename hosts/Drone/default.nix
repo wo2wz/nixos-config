@@ -70,8 +70,6 @@
     };
   };
 
-  environment.defaultPackages = lib.mkForce [];
-
   # for cloudflare browser ssh
   services.openssh.settings.Macs = [
     "hmac-sha2-512"
