@@ -11,6 +11,7 @@
     ./sops.nix
     ./uptime-kuma.nix
     ./vaultwarden.nix
+    ./zed.nix
     ./zipline.nix
   ];
 }
