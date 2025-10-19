@@ -1,11 +1,10 @@
-{ config, pkgs, lib, ... }:
+{ config, ... }:
 
 {
   imports = [
     ./boot.nix
     ./default-packages.nix
     ./locales.nix
-    ./networking.nix
     ./nix.nix
     ./users.nix
   ];

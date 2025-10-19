@@ -1,5 +1,5 @@
 {
-  description = "all this does now is pass inputs to other modules and set the system variable";
+  description = "My configuration(s) for the NixOS Linux Distribution";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
@@ -39,18 +39,21 @@
   outputs = inputs@{ ... }:
     let
       system = inputs.nixpkgs.lib.mkDefault "x86_64-linux";
-      nixosSystem =
+      mkHost =
         hostName:
         inputs.nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit hostName inputs system; };
-          modules = [ ./hosts/${hostName} ];
+          specialArgs = { inherit inputs system; };
+          modules = [
+            { networking.hostName = hostName; }
+            ./hosts/${hostName}
+          ];
         };
     in {
       nixosConfigurations = {
-        Swordsmachine = nixosSystem "Swordsmachine";
-        Earthmover = nixosSystem "Earthmover";
-        Drone = nixosSystem "Drone";
-        Mindflayer = nixosSystem "Mindflayer";
+        Swordsmachine = mkHost "Swordsmachine";
+        Earthmover = mkHost "Earthmover";
+        Drone = mkHost "Drone";
+        Mindflayer = mkHost "Mindflayer";
       };
   };
 }

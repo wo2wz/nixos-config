@@ -1,4 +1,4 @@
-{ hostName, inputs, config, lib, pkgs, ... }:
+{ inputs, config, lib, pkgs, ... }:
 
 {
   imports = [
@@ -60,14 +60,11 @@
 
   services.zfs.autoScrub.enable = true;
 
-  networking = {
-    hostName = "${hostName}";
-    firewall = lib.mkForce {
-      allowedTCPPorts = [];
-      allowedTCPPortRanges = [];
-      allowedUDPPorts = [];
-      allowedUDPPortRanges = [];
-    };
+  networking.firewall = lib.mkForce {
+    allowedTCPPorts = [];
+    allowedTCPPortRanges = [];
+    allowedUDPPorts = [];
+    allowedUDPPortRanges = [];
   };
 
   # for cloudflare browser ssh
