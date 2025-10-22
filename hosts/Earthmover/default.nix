@@ -7,6 +7,16 @@
     ../../modules/common
     
     ../../modules/nixos
+
+    ../../modules/nixos/system/colors.nix
+    ../../modules/nixos/system/console-colors.nix
+    ../../modules/nixos/system/desktop.nix
+    ../../modules/nixos/system/fonts.nix
+    ../../modules/nixos/system/home-manager.nix
+    ../../modules/nixos/system/scx.nix
+    ../../modules/nixos/system/swap.nix
+    ../../modules/nixos/system/yubikey.nix
+    ../../modules/nixos/system/zswap.nix
   ];
 
   fileSystems = {

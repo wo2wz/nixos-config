@@ -1,0 +1,160 @@
+* {
+    font-family: FontAwesome, "Hack Nerd Font";
+    font-size: 11pt;
+}
+
+window#waybar {
+    background: transparent;
+    color: @base05;
+}
+
+tooltip {
+    color: @base05;
+    border-color: @base0E;
+}
+
+tooltip label {
+    color: @base05;
+}
+
+#workspaces,
+#window,
+#clock,
+#cpu-temp,
+#memory,
+#battery,
+#power-profiles-daemon,
+#backlight,
+#network,
+#pulseaudio,
+#tray
+
+#workspaces {
+    margin-right: 4px;
+    padding-right: 15px;
+    border: 2px solid @base0E;
+    border-radius: 12px;
+    background: @base00;
+}
+
+#workspaces button {
+    padding-right: 8px;
+    color: @base05;
+}
+
+#workspaces button.focused,
+#workspaces button.active {
+    border-bottom: 3px solid @base03;
+    border-radius: 6px;
+}
+
+#window {
+    margin: 0 4px 0 4px;
+    padding-left: 15px;
+    padding-right: 15px;
+    border: 2px solid @base0E;
+    border-radius: 12px;
+    background: @base00;
+}
+
+#clock {
+    margin: 0 4px 0 4px;
+    padding-left: 15px;
+    padding-right: 15px;
+    border: 2px solid @base0E;
+    border-radius: 12px;
+    background: @base00;
+}
+
+#cpu-temp {
+    margin: 0 4px 0 4px;
+    padding-left: 15px;
+    padding-right: 15px;
+    border: 2px solid @base0E;
+    border-radius: 12px;
+    background: @base00;
+}
+
+#temperature {
+    padding-right: 12px;
+}
+
+#cpu {
+    padding-right: 5px;
+}
+
+#memory {
+    margin: 0 4px 0 4px;
+    padding-left: 15px;
+    padding-right: 15px;
+    border: 2px solid @base0E;
+    border-radius: 12px;
+    background: @base00;
+}
+
+#battery {
+    margin: 0 4px 0 4px;
+    padding-left: 15px;
+    padding-right: 15px;
+    border: 2px solid @base0E;
+    border-radius: 12px;
+    background: @base00;
+}
+
+#power-profiles-daemon {
+    margin: 0 4px 0 4px;
+    padding-left: 12px;
+    padding-right: 15px;
+    border: 2px solid @base0E;
+    border-radius: 12px;
+    background: @base00;
+}
+
+#backlight {
+    margin: 0 4px 0 4px;
+    padding-left: 15px;
+    padding-right: 15px;
+    border: 2px solid @base0E;
+    border-radius: 12px;
+    background: @base00;
+}
+
+#network {
+    margin: 0 4px 0 4px;
+    padding-left: 15px;
+    padding-right: 15px;
+    border: 2px solid @base0E;
+    border-radius: 12px;
+    background: @base00;
+}
+
+#pulseaudio {
+    margin: 0 4px 0 4px;
+    padding-left: 15px;
+    padding-right: 15px;
+    border: 2px solid @base0E;
+    border-radius: 12px;
+    background: @base00;
+}
+
+#tray {
+    margin-left: 4px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border: 2px solid @base0E;
+    border-radius: 12px;
+    background: @base00;
+}
+
+button {
+    /* Use box-shadow instead of border so the text isn't offset */
+    box-shadow: inset 0 -3px transparent;
+    /* Avoid rounded borders under each button name */
+    border: none;
+    border-radius: 0;
+}
+
+/* remove right margin if pulseaudio is on the right */
+.modules-right > widget:last-child > #pulseaudio {
+    margin-right: 0;
+}
