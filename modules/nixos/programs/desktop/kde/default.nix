@@ -19,5 +19,13 @@
     konsole
     khelpcenter
     krdp
+    xwaylandvideobridge
+    plasma-browser-integration
+    baloo-widgets
+    ffmpegthumbs
+    dolphin-plugins
+    kate
+    okular
+    gwenview
   ];
 }

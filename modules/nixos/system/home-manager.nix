@@ -8,11 +8,9 @@
     useUserPackages = true;
     backupFileExtension = "bak";
     extraSpecialArgs = { inherit inputs; };
-    users.wo2w = {
-      home = {
-        username = "wo2w";
-        homeDirectory = "/home/wo2w";
-      };
+    users.wo2w.home = {
+      username = "wo2w";
+      homeDirectory = "/home/wo2w";
     };
   };
 }
