@@ -42,7 +42,7 @@
   home-manager.users.wo2w = {
     imports = [
       ../../modules/home
-    ];# necessary to make the camera not look like the sun
+    ];
 
     programs.btop = {
       package = pkgs.btop-cuda;
