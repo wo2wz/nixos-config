@@ -4,7 +4,6 @@
   imports = [
     ./niri
     ./waybar
-    ./flameshot.nix
     ./fuzzel.nix
     ./hypridle.nix
     ./hyprlock.nix
