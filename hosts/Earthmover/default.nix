@@ -8,7 +8,6 @@
     
     ../../modules/nixos
 
-    ../../modules/nixos/programs/desktop/kde
     ../../modules/nixos/programs/desktop/niri
     ../../modules/nixos/programs/desktop/niri/niri/window-rules/dual-monitor.nix
     ../../modules/nixos/programs/desktop/niri/niri/workspaces/dual-monitor.nix
