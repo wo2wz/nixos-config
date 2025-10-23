@@ -70,8 +70,5 @@
         };
       };
     };
-
-    # fix screen tearing in games
-    # debug.wait-for-frame-completion-before-queueing = {};
   };
 }
