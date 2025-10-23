@@ -52,9 +52,26 @@
 
     outputs = {
       "Sharp Corporation 0x148D Unknown".scale = 2.25; # Laptop builtin screen
+      "LG Electronics LG Ultra HD 0x0003AC16" = {
+        scale = 1.7;
+        position = {
+          x = 0;
+          y = 0;
+        };
+
+        focus-at-startup = true;
+      };
+
+      "Dell Inc. DELL U2719D 75BWZ83" = {
+        scale = 1.1;
+        position = {
+          x = 2259;
+          y = 38;
+        };
+      };
     };
 
     # fix screen tearing in games
-    debug.wait-for-frame-completion-before-queueing = {};
+    # debug.wait-for-frame-completion-before-queueing = {};
   };
 }
