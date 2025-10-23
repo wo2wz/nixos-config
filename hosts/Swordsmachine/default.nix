@@ -29,6 +29,8 @@
     persistencedSha256 = "sha256-hx4w4NkJ0kN7dkKDiSOsdJxj9+NZwRsZEuhqJ5Rq3nM=";
   };
 
+  environment.etc."Yubico/u2f_keys".text = "wo2w:RFdNibvUq8C38apD6K7kw116TfPBBbOf1PdQJrpAtorqV9JGvOTvVK71BR0CvlFCQ8/i+Dr/9D+H3QX5XIy+4g==,Q/N8eJG6lqrczqZQOZ1/Q956ufeORn4GlXuD//IC9swlbohg7lg1bF7wxJ1e8w66hb+vvoCrTrE0wTlbtsEbCw==,es256,+presence";
+
   # necessary to make the camera not look like the sun
   environment.systemPackages = [ pkgs.cameractrls ];
 
