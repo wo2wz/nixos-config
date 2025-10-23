@@ -26,6 +26,11 @@
       };
     }
 
+    {
+      matches = [{ app-id = "com.dec05eba.gpu_screen_recorder"; }];
+      open-floating = false;
+    }
+
     # code
     {
       matches = [{ app-id = "codium"; }];
