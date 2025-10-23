@@ -8,6 +8,11 @@
     
     ../../modules/nixos
 
+    ../../modules/nixos/programs/desktop/kde
+    ../../modules/nixos/programs/desktop/niri
+    ../../modules/nixos/programs/desktop/niri/niri/window-rules/dual-monitor.nix
+    ../../modules/nixos/programs/desktop/niri/niri/workspaces/dual-monitor.nix
+
     ../../modules/nixos/system/colors.nix
     ../../modules/nixos/system/console-colors.nix
     ../../modules/nixos/system/desktop.nix
@@ -37,6 +42,8 @@
     };
   };
 
+  environment.etc."Yubico/u2f_keys".text = "wo2w:5XpYBFyl+I7J2oecG9eUEhkEmYz9xc7Ne1ymjDBM6bwHbrlStj7u4f0aGn9AJUdCIDVp1VHSBGKj8YrLXXAZeg==,zOM9siNUxu7YTR1OFe2er263M2hLyYq1Ct1/7i/p4rimXzsH/fP5iVC4Etif1yxG/xrivKKyICeRvKr2BTv0DQ==,es256,+presence";
+
   home-manager.users.wo2w = {
     imports = [
       ../../modules/home
@@ -50,8 +57,6 @@
         custom_gpu_name0 = "RX 6700 XT";
       };
     };
-
-    home.file.".config/Yubico/u2f_keys".text = "wo2w:z53Q2IqyzYjUP22RRDsf+vfD9x+AJ1ymrOFslox0IeqHCHC5JecjjtQFGYwUPkP7KG7sEQ52ZG4ZhXxSg8/UZw==,8CnIjGYN5vD+jDyk4I4HQzUDJ5eMjcZ+s2209O76u/gynbPKAXX+U7/vrWHNqKz6YqHCpvD9KpJlLbzNh/xJJg==,es256,+presence";
 
     home.stateVersion = "25.05";
   };
