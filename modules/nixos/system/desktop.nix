@@ -30,6 +30,7 @@
 
   environment.systemPackages = with pkgs; [
     bitwarden
+    kdePackages.gwenview
     krita
     vlc
     gpu-screen-recorder-gtk
