@@ -45,7 +45,7 @@
     ];
 
     # fix screen tearing in games
-    home-manager.users.wo2w.programs.niri.settings.debug.wait-for-frame-completion-before-queueing = {};
+    programs.niri.settings.debug.wait-for-frame-completion-before-queueing = {};
 
     programs.btop = {
       package = pkgs.btop-cuda;
