@@ -38,7 +38,7 @@
       inactive.color = config.custom.colors.base0E;
     };
 
-    screenshot-path = "~/Pictures/Screenshots/%F_%H-%M-%S";
+    screenshot-path = "~/Pictures/Screenshots/%F_%H-%M-%S.png";
 
     outputs = {
       "Sharp Corporation 0x148D Unknown".scale = 2.25; # Laptop builtin screen
