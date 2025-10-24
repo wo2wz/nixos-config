@@ -8,16 +8,6 @@
     inputs.niri.nixosModules.niri
   ];
 
-  # compositor: niri
-  # bar: waybar
-  # wallpaper: swaybg
-  # application launcher: rofi
-  # idle daemon: hypridle
-  # screen locker: hyprlock
-  # notification daemon: mako
-  # screenshot tool: flameshot
-  # file manager: yazi
-
   programs.niri.enable = true;
 
   environment.systemPackages = [
