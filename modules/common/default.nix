@@ -3,7 +3,7 @@
 {
   imports = [
     ./boot.nix
-    ./default-packages.nix
+    ./debloat.nix
     ./locales.nix
     ./nix.nix
     ./users.nix
