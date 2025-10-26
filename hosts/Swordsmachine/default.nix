@@ -14,7 +14,16 @@
     ../../modules/nixos/services/openssh.nix
     ../../modules/nixos/services/tailscale.nix
     
-    ../../modules/nixos/system
+    ../../modules/nixos/system/colors.nix
+    ../../modules/nixos/system/console-colors.nix
+    ../../modules/nixos/system/desktop.nix
+    ../../modules/nixos/system/fonts.nix
+    ../../modules/nixos/system/home-manager.nix
+    ../../modules/nixos/system/laptop.nix
+    ../../modules/nixos/system/scx.nix
+    ../../modules/nixos/system/swap.nix
+    ../../modules/nixos/system/yubikey.nix
+    ../../modules/nixos/system/zswap.nix
 
     inputs.nixos-hardware.nixosModules.dell-xps-15-9570-nvidia
   ];
