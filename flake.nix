@@ -54,6 +54,7 @@
         Earthmover = mkHost "Earthmover";
         Drone = mkHost "Drone";
         Mindflayer = mkHost "Mindflayer";
+        Gutterman = mkHost "Gutterman";
       };
   };
 }
