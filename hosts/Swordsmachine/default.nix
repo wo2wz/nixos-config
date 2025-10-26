@@ -19,6 +19,10 @@
     inputs.nixos-hardware.nixosModules.dell-xps-15-9570-nvidia
   ];
 
+  # boot option to disable the dgpu for power saving
+  # also the longest one-line option name in this config
+  specialisation.disable-dgpu.configuration.hardware.nvidiaOptimus.disable = true;
+
   # pin the latest nvidia driver that works because they are so awesome in releasing an update that broke opengl for my 1050ti
   hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.mkDriver {
     version = "570.144";
