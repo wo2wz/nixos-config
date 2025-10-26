@@ -7,13 +7,15 @@
     let
       colors = config.custom.colors;
     in {
-      max-history = 10;
-      default-timeout = 5000;
       anchor = "bottom-right";
+      outer-margin = "0,5,20,0"; 
+
+      border-size = 4;
 
       on-button-middle = "dismiss-group";
 
-      border-size = 4;
+      max-history = 10;
+      default-timeout = 5000;
 
       background-color = colors.base00;
       text-color = colors.base05;
