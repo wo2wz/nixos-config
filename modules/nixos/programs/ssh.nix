@@ -5,22 +5,15 @@
     startAgent = true;
     enableAskPassword = true;
     extraConfig = "
-      IdentityFile /home/wo2w/.ssh/ssh-key
+      IdentityFile /home/wo2w/.ssh/yubikey
       User wo2w
+      Port 8743
       Host gameserver
-        Hostname 192.168.2.221
-        Port 22
+        Hostname 192.168.2.112
       Host Swordsmachine
-        Hostname 192.168.2.84
-        Port 8743
+        Hostname 192.168.2.74
       Host Earthmover
-        Hostname 192.168.2.87
-        Port 8743
+        Hostname 192.168.2.175
     ";
-  };
-
-  environment = {
-    systemPackages = if config.services.desktopManager.plasma6.enable then with pkgs; [ kdePackages.ksshaskpass ] else [];
-    variables.SSH_ASKPASS_REQUIRE = "prefer";
   };
 }
