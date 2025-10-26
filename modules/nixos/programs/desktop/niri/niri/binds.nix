@@ -3,16 +3,22 @@
 {
   home-manager.users.wo2w.programs.niri.settings.binds = {
     # custom binds
-    "Mod+Space".action.spawn = [ "fuzzel" ];
-    "Print".action.screenshot = {};
-    "Alt+Print".action.screenshot-window = {};
-    "Ctrl+Print".action.screenshot-screen = {};
+    "Mod+Space".action.spawn = "fuzzel";
     "Mod+T".action.spawn = "kitty";
+
+    "Print".action.screenshot = {};
+    "Shift+Print".action.screenshot-window = {};
+    "Alt+Print".action.screenshot-screen = {};
+    
+    "Mod+S".action.screenshot = {};
+    "Mod+Shift+S".action.screenshot-window = {};
+    "Super+Ctrl+S".action.screenshot-screen = {};
   
     "Super+Alt+L".action.spawn = "hyprlock";
+    "Super+Alt+P".action.power-off-monitors = {};
     "Super+Alt+S".action.spawn = [ "systemctl" "sleep" ];
     "Super+Alt+E".action.quit = {};
-    "Super+Alt+Shift+S".action.spawn = "poweroff";
+    "Super+Alt+Shift+P".action.spawn = "poweroff";
     "Super+Alt+Shift+R".action.spawn = "reboot";
 
     "Mod+O".action.open-overview = {};
@@ -223,9 +229,5 @@
     # Finer height adjustments when in column with other windows.
     "Mod+Shift+Minus".action.set-window-height = "-10%";
     "Mod+Shift+Equal".action.set-window-height = "+10%";
-
-    # Powers off the monitors. To turn them back on, do any input like
-    # moving the mouse or pressing any other key.
-    "Mod+Shift+P".action.power-off-monitors = {};
   };
 }
