@@ -1,4 +1,4 @@
-{ inputs, config, pkgs, ... }:
+{ inputs, config, pkgs, lib, ... }:
 
 {
   imports = [
@@ -21,42 +21,48 @@
     "org.freedesktop.impl.portal.Secret" = "gnome-keyring";
   };
 
-  home-manager.users.wo2w.programs.niri.settings = {
-    hotkey-overlay.skip-at-startup = true;
-    prefer-no-csd = true;
+  services.gnome.gnome-keyring.enable = lib.mkForce false;
 
-    gestures.hot-corners.enable = false;
-    input.touchpad.natural-scroll = false;
+  home-manager.users.wo2w = {
+    services.gnome-keyring.enable = true;
 
-    cursor = {
-      theme = "Bibata-Modern-Classic";
-      size = 24;
-    };
+    programs.niri.settings = {
+      hotkey-overlay.skip-at-startup = true;
+      prefer-no-csd = true;
 
-    layout.focus-ring = {
-      active.color = config.custom.colors.base0D;
-      inactive.color = config.custom.colors.base0E;
-    };
+      gestures.hot-corners.enable = false;
+      input.touchpad.natural-scroll = false;
 
-    screenshot-path = "~/Pictures/Screenshots/%F_%H-%M-%S.png";
-
-    outputs = {
-      "Sharp Corporation 0x148D Unknown".scale = 2.25; # Laptop builtin screen
-      "LG Electronics LG Ultra HD 0x0003AC16" = {
-        scale = 1.7;
-        position = {
-          x = 0;
-          y = 0;
-        };
-
-        focus-at-startup = true;
+      cursor = {
+        theme = "Bibata-Modern-Classic";
+        size = 24;
       };
 
-      "Dell Inc. DELL U2719D 75BWZ83" = {
-        scale = 1.1;
-        position = {
-          x = 2259;
-          y = 38;
+      layout.focus-ring = {
+        active.color = config.custom.colors.base0D;
+        inactive.color = config.custom.colors.base0E;
+      };
+
+      screenshot-path = "~/Pictures/Screenshots/%F_%H-%M-%S.png";
+
+      outputs = {
+        "Sharp Corporation 0x148D Unknown".scale = 2.25; # Laptop builtin screen
+        "LG Electronics LG Ultra HD 0x0003AC16" = {
+          scale = 1.7;
+          position = {
+            x = 0;
+            y = 0;
+          };
+
+          focus-at-startup = true;
+        };
+
+        "Dell Inc. DELL U2719D 75BWZ83" = {
+          scale = 1.1;
+          position = {
+            x = 2259;
+            y = 38;
+          };
         };
       };
     };
