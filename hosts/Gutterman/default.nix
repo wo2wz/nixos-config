@@ -29,6 +29,17 @@
     CacheFromLocalhost=true
   '';
 
+  networking.firewall = {
+    allowedTCPPorts = [
+      8000
+      8001
+    ];
+    allowedUDPPorts = [
+      8000
+      8001
+    ];
+  };
+
   environment.systemPackages =
   let
     nixpkgs-unstable = import inputs.nixpkgs-unstable {
