@@ -5,6 +5,5 @@
     ./bash.nix
     ./gaming.nix
     ./git.nix
-    ./ssh.nix
   ];
 }
