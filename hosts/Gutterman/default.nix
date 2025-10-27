@@ -1,4 +1,4 @@
-{ config, modulesPath, lib, ... }:
+{ inputs, config, modulesPath, lib, pkgs, ... }:
 
 {
   imports = [
@@ -28,6 +28,19 @@
     Cache=true
     CacheFromLocalhost=true
   '';
+
+  environment.systemPackages =
+  let
+    nixpkgs-unstable = import inputs.nixpkgs-unstable {
+      system = "${pkgs.system}";
+      config.allowUnfree = true;
+    };
+  in [
+    pkgs.btop
+    nixpkgs-unstable.graalvmPackages.graalvm-oracle_17
+    inputs.nixpkgs-pin.legacyPackages.${pkgs.system}.graalvm-ce
+    pkgs.steamcmd
+  ];
 
   nixpkgs.hostPlatform = "x86_64-linux";
   system.stateVersion = "25.05";
