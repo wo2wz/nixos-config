@@ -11,7 +11,7 @@
     ../../modules/nixos/programs/desktop/niri/niri/window-rules/single-monitor.nix
     ../../modules/nixos/programs/desktop/niri/niri/workspaces/single-monitor.nix
 
-    ../../modules/nixos/services/tailscale.nix
+    ../../modules/nixos/services/tailscale
     
     ../../modules/nixos/system/colors.nix
     ../../modules/nixos/system/console-colors.nix

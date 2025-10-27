@@ -9,8 +9,8 @@
     ../../modules/nixos/programs/bash.nix
     ../../modules/nixos/programs/git.nix
 
-    ../../modules/nixos/services/tailscale.nix
     ../../modules/nixos/services/homeserver
+    ../../modules/nixos/services/tailscale
   ];
   
   fileSystems = {
