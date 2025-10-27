@@ -8,8 +8,6 @@
 
     ../../modules/nixos/programs/bash.nix
     ../../modules/nixos/programs/git.nix
-    
-    ../../modules/nixos/services/openssh.nix
 
     ../../modules/nixos/system/headless.nix
     ../../modules/nixos/system/minimal.nix

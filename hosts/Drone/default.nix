@@ -8,7 +8,7 @@
 
     ../../modules/nixos/programs/bash.nix
     ../../modules/nixos/programs/git.nix
-    ../../modules/nixos/services/openssh.nix
+
     ../../modules/nixos/services/tailscale.nix
     ../../modules/nixos/services/homeserver
   ];
@@ -66,12 +66,6 @@
     allowedUDPPorts = [];
     allowedUDPPortRanges = [];
   };
-
-  # for cloudflare browser ssh
-  services.openssh.settings.Macs = [
-    "hmac-sha2-512"
-    "hmac-sha2-256"
-  ];
 
   system.stateVersion = "25.05";
 }
