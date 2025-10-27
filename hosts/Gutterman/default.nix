@@ -9,6 +9,8 @@
     ../../modules/nixos/programs/bash.nix
     ../../modules/nixos/programs/git.nix
 
+    ../../modules/nixos/services/tailscale
+
     ../../modules/nixos/system/headless.nix
     ../../modules/nixos/system/minimal.nix
   ];
