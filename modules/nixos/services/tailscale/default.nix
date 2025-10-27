@@ -1,8 +1,8 @@
 { config, ... }:
 
 {
-  services.tailscale = {
-    enable = true;
-    extraDaemonFlags = [ "--no-logs-no-support" ];
-  };
+  imports = [
+    ./main.nix
+    ./ssh.nix
+  ];
 }
