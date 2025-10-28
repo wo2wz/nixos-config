@@ -28,6 +28,8 @@
       };
       environmentFile = config.sops.secrets."caddy/secrets.env".path;
 
+      enableReload = false;
+
       extraConfig = ''
         (cloudflare-tls) {
             tls ${config.sops.secrets."caddy/wo2wz.fyi.crt".path} ${config.sops.secrets."caddy/wo2wz.fyi.key".path}
