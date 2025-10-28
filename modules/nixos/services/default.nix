@@ -2,7 +2,7 @@
 
 {
   imports = [
+    ./tailscale
     ./mumble.nix
-    ./tailscale.nix
   ];
 }
