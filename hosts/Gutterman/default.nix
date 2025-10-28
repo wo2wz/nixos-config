@@ -17,6 +17,9 @@
 
   proxmoxLXC.manageHostName = true;
 
+  # enabled by default in the proxmox-lxc module in nixpkgs
+  services.openssh.enable = false;
+
   boot.loader.systemd-boot.enable = lib.mkForce false;
 
   services.fstrim.enable = false;
