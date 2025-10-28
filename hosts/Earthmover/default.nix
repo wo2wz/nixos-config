@@ -9,8 +9,10 @@
     ../../modules/nixos/programs/desktop/niri
     ../../modules/nixos/programs/desktop/niri/niri/window-rules/dual-monitor.nix
     ../../modules/nixos/programs/desktop/niri/niri/workspaces/dual-monitor.nix
+    ../../modules/nixos/programs/gaming.nix
 
-    ../../modules/nixos/services
+    ../../modules/nixos/services/tailscale
+    ../../modules/nixos/services/mumble.nix
 
     ../../modules/nixos/system/colors.nix
     ../../modules/nixos/system/console-colors.nix
