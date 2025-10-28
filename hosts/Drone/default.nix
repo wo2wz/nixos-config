@@ -11,6 +11,8 @@
 
     ../../modules/nixos/services/homeserver
     ../../modules/nixos/services/tailscale
+
+    ../../modules/nixos/system/minimal.nix
   ];
   
   fileSystems = {
