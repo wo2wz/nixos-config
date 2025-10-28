@@ -15,11 +15,7 @@
     ../../modules/nixos/system/minimal.nix
   ];
 
-  proxmoxLXC = {
-    manageNetwork = false;
-    manageHostName = true;
-    privileged = true;
-  };
+  proxmoxLXC.manageHostName = true;
 
   boot.loader.systemd-boot.enable = lib.mkForce false;
 
