@@ -5,6 +5,7 @@
     ./authentik.nix
     ./caddy.nix
     ./cloudflared.nix
+    ./kanidm.nix
     ./nextcloud.nix
     ./ntfy.nix
     ./restic.nix
