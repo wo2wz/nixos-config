@@ -17,6 +17,7 @@
     isSystemUser = true;
   };
   users.groups.zipline = {};
+
   services.zipline = {
     enable = true;
     settings = {
