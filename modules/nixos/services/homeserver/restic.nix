@@ -82,14 +82,15 @@
         "/var/lib/vaultwarden"
         "/var/backups/db-backup"
       ];
+
       # exclude databases since they are covered separately
       exclude = [
-        "*.db"
-        "*.db-shm"
-        "*.db-wal"
-        "*.sqlite3"
-        "*.sqlite3-shm"
-        "*.sqlite3-wal"
+        "/var/lib/**/*.db"
+        "/var/lib/**/*.db-shm"
+        "/var/lib/**/*.db-wal"
+        "/var/lib/**/*.sqlite3"
+        "/var/lib/**/*.sqlite3-shm"
+        "/var/lib/**/*.sqlite3-wal"
 
         "/var/lib/vaultwarden/sends/*"
         "/var/lib/vaultwarden/tmp/*"
