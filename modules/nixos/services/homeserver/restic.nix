@@ -90,6 +90,9 @@
         "*.sqlite3"
         "*.sqlite3-shm"
         "*.sqlite3-wal"
+
+        "/var/lib/vaultwarden/sends/*"
+        "/var/lib/vaultwarden/tmp/*"
       ];
     };
 
