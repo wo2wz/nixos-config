@@ -80,7 +80,6 @@
 
       paths = [
         "/var/lib/private/uptime-kuma"
-        "/var/lib/nextcloud"
         "/var/lib/vaultwarden"
         "/var/backups/db-backup"
       ];
