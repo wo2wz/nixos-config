@@ -9,18 +9,24 @@
   systemd.services.db-dump = {
     wantedBy = [ "restic-backups-main.service" "restic-backups-offsite.service" ];
     script = ''
-      if [ ! -d /var/backups/db-backup ]; then
-          mkdir -p -m 600 /var/backups/db-backup
+      DB_BACKUP_DIR=/var/backups/db-backup
+
+      SQLITE_PATH=${lib.getExe pkgs.sqlite}
+      SUDO_PATH=${lib.getExe pkgs.sudo}
+      PGDUMP_PATH=${lib.getExe' pkgs.postgresql "pg_dump"}
+
+      if [ ! -d $DB_BACKUP_DIR ]; then
+          mkdir -p -m 600 $DB_BACKUP_DIR
       fi
 
-      ${lib.getExe pkgs.sqlite} /var/lib/vaultwarden/db.sqlite3 ".backup /var/backups/db-backup/vaultwarden.sqlite3"
-      ${lib.getExe pkgs.sqlite} /var/lib/uptime-kuma/kuma.db ".backup /var/backups/db-backup/kuma.db"
-      ${lib.getExe pkgs.sqlite} /var/lib/nextcloud/data/nextcloud.db ".backup /var/backups/db-backup/nextcloud.db"
-      ${lib.getExe pkgs.sqlite} /var/lib/ntfy-sh/user.db ".backup /var/backups/db-backup/ntfy-user.db"
+      $SQLITE_PATH /var/lib/vaultwarden/db.sqlite3 ".backup $DB_BACKUP_DIR/vaultwarden.sqlite3"
+      $SQLITE_PATH /var/lib/uptime-kuma/kuma.db ".backup $DB_BACKUP_DIR/kuma.db"
+      $SQLITE_PATH /var/lib/nextcloud/data/nextcloud.db ".backup $DB_BACKUP_DIR/nextcloud.db"
+      $SQLITE_PATH /var/lib/ntfy-sh/user.db ".backup $DB_BACKUP_DIR/ntfy-user.db"
 
-      ${lib.getExe pkgs.sudo} -u onlyoffice -- ${lib.getExe' pkgs.postgresql "pg_dump"} > /var/backups/db-backup/dump-onlyoffice
-      ${lib.getExe pkgs.sudo} -u zipline -- ${lib.getExe' pkgs.postgresql "pg_dump"} > /var/backups/db-backup/dump-zipline
-      ${lib.getExe pkgs.sudo} -u postgres -- ${lib.getExe' pkgs.postgresql "pg_dumpall"} -g > /var/backups/db-backup/dump-globals      
+      $SUDO_PATH -u onlyoffice -- $PGDUMP_PATH > /var/backups/db-backup/dump-onlyoffice
+      $SUDO_PATH -u zipline -- $PGDUMP_PATH > /var/backups/db-backup/dump-zipline
+      $SUDO_PATH -u postgres -- ${lib.getExe' pkgs.postgresql "pg_dumpall"} -g > /var/backups/db-backup/dump-globals      
     '';
     serviceConfig = {
       Type = "oneshot";
