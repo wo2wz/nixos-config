@@ -18,7 +18,6 @@
 
   services.vaultwarden = {
     enable = true;
-    backupDir = "/var/backups/vaultwarden";
     config = {
       DOMAIN = "https://vaultwarden.taild5f7e6.ts.net";
       IP_HEADER = "X-Forwarded-For";
