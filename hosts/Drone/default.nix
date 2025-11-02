@@ -51,13 +51,26 @@
       fsType = "zfs";
     };
 
-    # bind mounts for file storage dirs from external storage
-    "/var/lib/nextcloud/data/2fc6e1af776402040d95e1d5adc3babe4928587e84170c882815c808b472b3fa" = {
+    # bind mounts for file storage dirs on nextcloud from external storage
+    "/var/lib/nextcloud/data/534abfe6ec19b02ab61e1196758f7a971e75f07077a431ea15157d8e10910fc5/files" = {
       depends = [ "/mnt/external/storage" ];
-      device = "/mnt/external/storage/nextcloud/data/2fc6e1af776402040d95e1d5adc3babe4928587e84170c882815c808b472b3fa";
+      device = "/mnt/external/storage/nextcloud/data/534abfe6ec19b02ab61e1196758f7a971e75f07077a431ea15157d8e10910fc5/files";
       fsType = "none";
       options = [ "bind" ];
     };
+    "/var/lib/nextcloud/data/534abfe6ec19b02ab61e1196758f7a971e75f07077a431ea15157d8e10910fc5/files_versions" = {
+      depends = [ "/mnt/external/storage" ];
+      device = "/mnt/external/storage/nextcloud/data/534abfe6ec19b02ab61e1196758f7a971e75f07077a431ea15157d8e10910fc5/files_versions";
+      fsType = "none";
+      options = [ "bind" ];
+    };
+    "/var/lib/nextcloud/data/534abfe6ec19b02ab61e1196758f7a971e75f07077a431ea15157d8e10910fc5/files_trashbin" = {
+      depends = [ "/mnt/external/storage" ];
+      device = "/mnt/external/storage/nextcloud/data/534abfe6ec19b02ab61e1196758f7a971e75f07077a431ea15157d8e10910fc5/files_versions";
+      fsType = "none";
+      options = [ "bind" ];
+    };
+
   };
 
   services.zfs.autoScrub.enable = true;
