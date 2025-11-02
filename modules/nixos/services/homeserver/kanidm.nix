@@ -8,6 +8,10 @@
       owner = "kanidm";
       group = "kanidm";
     };
+    "kanidm/oauth2/zipline" = {
+      owner = "kanidm";
+      group = "kanidm";
+    };
   };
 
   users.groups.tls-kanidm.members = [ "caddy" "kanidm" ];
@@ -63,7 +67,10 @@
         legalName = "Wo2wz_";
       };
 
-      groups.nextcloud-grp.members = [ "wo2w" ];
+      groups = {
+        nextcloud-grp.members = [ "wo2w" ];
+        zipline-grp.members = [ "wo2w" ];
+      };
 
       systems.oauth2 = {
         nextcloud = {
@@ -73,6 +80,16 @@
 
           basicSecretFile = config.sops.secrets."kanidm/oauth2/nextcloud".path;
           scopeMaps.nextcloud-grp = [ "openid" "profile" ];
+        };
+
+        zipline = {
+          displayName = "Zipline";
+          originUrl = "https://zipline.wo2wz.fyi/api/auth/oauth/oidc";
+          originLanding = "https://zipline.wo2wz.fyi";
+
+          allowInsecureClientDisablePkce = true;
+          basicSecretFile = config.sops.secrets."kanidm/oauth2/zipline".path;
+          scopeMaps.zipline-grp = [ "openid" "profile" "email" "offline_access" ];
         };
       };
     };
