@@ -62,6 +62,8 @@
         tailscale {
             auth_key {env.CADDY_TAILSCALE_AUTH_KEY}
             state_dir ${config.services.caddy.dataDir}/caddy-tailscale
+
+            ephemeral true
         }
       '';
 
