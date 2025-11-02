@@ -79,7 +79,6 @@
       };
 
       paths = [
-        "/var/lib/private/uptime-kuma"
         "/var/lib/vaultwarden"
         "/var/backups/db-backup"
       ];
