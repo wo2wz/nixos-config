@@ -6,7 +6,7 @@
   # for use as restic backend
 #  environment.systemPackages = [ pkgs.rclone ];
 
-  systemd.services.db-dump = {
+  systemd.services.db-backup = {
     wantedBy = [ "restic-backups-main.service" "restic-backups-offsite.service" ];
     script = ''
       DB_BACKUP_DIR=/var/backups/db-backup
