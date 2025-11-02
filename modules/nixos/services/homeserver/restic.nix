@@ -23,6 +23,7 @@
       $SQLITE_PATH /var/lib/uptime-kuma/kuma.db ".backup $DB_BACKUP_DIR/kuma.db"
       $SQLITE_PATH /var/lib/nextcloud/data/nextcloud.db ".backup $DB_BACKUP_DIR/nextcloud.db"
       $SQLITE_PATH /var/lib/ntfy-sh/user.db ".backup $DB_BACKUP_DIR/ntfy-user.db"
+      $SQLITE_PATH /var/lib/kanidm/kanidm.db ".backup $DB_BACKUP_DIR/kanidm.db"
 
       $SUDO_PATH -u onlyoffice -- $PGDUMP_PATH > /var/backups/db-backup/dump-onlyoffice
       $SUDO_PATH -u zipline -- $PGDUMP_PATH > /var/backups/db-backup/dump-zipline
