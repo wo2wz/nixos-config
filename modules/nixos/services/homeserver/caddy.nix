@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ inputs, config, pkgs, ... }:
 
 {
   sops.secrets = {
@@ -19,12 +19,12 @@
   services = {
     caddy = {
       enable = true;
-      package = pkgs.caddy.withPlugins {
+      package = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.caddy.withPlugins {
         plugins = [
           "github.com/WeidiDeng/caddy-cloudflare-ip@v0.0.0-20231130002422-f53b62aa13cb"
-          "github.com/tailscale/caddy-tailscale@v0.0.0-20250915161136-32b202f0a953"
+          "github.com/tailscale/caddy-tailscale@v0.0.0-20251102144943-aea8960a2d3c"
         ];
-        hash = "sha256-icldgfR6CidNdsM/AcpaV484hrljGxj5KiAqTOjlKgg=";
+        hash = "sha256-8vqddvsZJyIlnx5Kq5F549xRg7Jvbm0xd5I/GCO+gog=";
       };
       environmentFile = config.sops.secrets."caddy/secrets.env".path;
 
