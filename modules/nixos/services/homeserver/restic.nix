@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   sops.secrets."restic/password" = {};
@@ -13,14 +13,14 @@
           mkdir -p -m 600 /var/backups/db-backup
       fi
 
-      ${pkgs.sqlite}/bin/sqlite3 /var/lib/vaultwarden/db.sqlite3 ".backup /var/backups/db-backup/vaultwarden.sqlite3"
-      ${pkgs.sqlite}/bin/sqlite3 /var/lib/uptime-kuma/kuma.db ".backup /var/backups/db-backup/kuma.db"
-      ${pkgs.sqlite}/bin/sqlite3 /var/lib/nextcloud/data/nextcloud.db ".backup /var/backups/db-backup/nextcloud.db"
-      ${pkgs.sqlite}/bin/sqlite3 /var/lib/ntfy-sh/user.db ".backup /var/backups/db-backup/ntfy-user.db"
+      ${lib.getExe pkgs.sqlite} /var/lib/vaultwarden/db.sqlite3 ".backup /var/backups/db-backup/vaultwarden.sqlite3"
+      ${lib.getExe pkgs.sqlite} /var/lib/uptime-kuma/kuma.db ".backup /var/backups/db-backup/kuma.db"
+      ${lib.getExe pkgs.sqlite} /var/lib/nextcloud/data/nextcloud.db ".backup /var/backups/db-backup/nextcloud.db"
+      ${lib.getExe pkgs.sqlite} /var/lib/ntfy-sh/user.db ".backup /var/backups/db-backup/ntfy-user.db"
 
-      ${pkgs.sudo}/bin/sudo -u onlyoffice -- ${pkgs.postgresql}/bin/pg_dump > /var/backups/db-backup/dump-onlyoffice
-      ${pkgs.sudo}/bin/sudo -u zipline -- ${pkgs.postgresql}/bin/pg_dump > /var/backups/db-backup/dump-zipline
-      ${pkgs.sudo}/bin/sudo -u postgres -- ${pkgs.postgresql}/bin/pg_dumpall -g > /var/backups/db-backup/dump-globals      
+      ${lib.getExe pkgs.sudo} -u onlyoffice -- ${lib.getExe' pkgs.postgresql "pg_dump"} > /var/backups/db-backup/dump-onlyoffice
+      ${lib.getExe pkgs.sudo} -u zipline -- ${lib.getExe' pkgs.postgresql "pg_dump"} > /var/backups/db-backup/dump-zipline
+      ${lib.getExe pkgs.sudo} -u postgres -- ${lib.getExe' pkgs.postgresql "pg_dumpall"} -g > /var/backups/db-backup/dump-globals      
     '';
     serviceConfig = {
       Type = "oneshot";
