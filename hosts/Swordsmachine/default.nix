@@ -6,10 +6,12 @@
 
     ../../modules/common
 
-    ../../modules/nixos/programs
     ../../modules/nixos/programs/desktop/niri
     ../../modules/nixos/programs/desktop/niri/niri/window-rules/single-monitor.nix
     ../../modules/nixos/programs/desktop/niri/niri/workspaces/single-monitor.nix
+
+    ../../modules/nixos/programs/bash.nix
+    ../../modules/nixos/programs/gaming.nix
 
     ../../modules/nixos/services/tailscale
     
