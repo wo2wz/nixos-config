@@ -21,7 +21,7 @@
             mkdir -p -m 600 $DB_BACKUP_DIR
         fi
 
-        umask 066
+        umask 077
 
         $SQLITE_PATH /var/lib/vaultwarden/db.sqlite3 ".backup $DB_BACKUP_DIR/vaultwarden.sqlite3"
         $SQLITE_PATH /var/lib/uptime-kuma/kuma.db ".backup $DB_BACKUP_DIR/kuma.db"
