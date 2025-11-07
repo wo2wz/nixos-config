@@ -3,15 +3,8 @@
 {
   networking.networkmanager.enable = true;
 
-  hardware = {
-    bluetooth = {
-      enable = true;
-      powerOnBoot = true;
-    };
-
-    # mesa graphics library
-    graphics.enable = true;
-  };
+  # mesa graphics library
+  hardware.graphics.enable = true;
 
   # audio
   services.pipewire = {
@@ -29,7 +22,6 @@
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
   environment.systemPackages = with pkgs; [
-    bitwarden
     kdePackages.gwenview
     krita
     vlc
