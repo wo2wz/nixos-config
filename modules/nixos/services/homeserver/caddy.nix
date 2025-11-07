@@ -19,6 +19,7 @@
   services = {
     caddy = {
       enable = true;
+      # use unstable for caddy-tailscale
       package = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.caddy.withPlugins {
         plugins = [
           "github.com/WeidiDeng/caddy-cloudflare-ip@v0.0.0-20231130002422-f53b62aa13cb"
@@ -28,6 +29,7 @@
       };
       environmentFile = config.sops.secrets."caddy/secrets.env".path;
 
+      # caddy-tailscale breaks reloading
       enableReload = false;
 
       extraConfig = ''
