@@ -68,7 +68,7 @@
         {
           name = "Node Exporter Full";
           disableDeletion = true;
-          options.path = ./dashboards/node-exporter-full.json
+          options.path = ./dashboards/node-exporter-full.json;
         }
       ];
 
