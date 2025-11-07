@@ -28,8 +28,29 @@
         enable_gzip = true;
       };
 
+      "auth.generic_oauth" = {
+        enabled = true;
+        name = "Kanidm";
+        client_id = "grafana";
+        auth_url = "https://kanidm.wo2wz.fyi/ui/oauth2";
+        token_url = "https://kanidm.wo2wz.fyi/oauth2/token";
+        api_url = "https://kanidm.wo2wz.fyi/oauth2/openid/grafana/userinfo";
+
+        scopes = [ "openid" "profile" "email" "groups" "offline_access" ];
+        login_attribute_path = "preferred_username";
+        email_attribute_path = "email";
+        groups_attribute_path = "groups";
+        role_attribute_path = "contains(grafana_users[*], 'GrafanaAdmin') && 'GrafanaAdmin' || 'Viewer'";
+        allow_assign_grafana_admin = true;
+
+        allow_sign_up = true;
+        use_pkce = true;
+        use_refresh_token = true;
+      };
+
       security = {
         secret_key = "$__env{GRAFANA_SECRET_KEY}";
+        disable_initial_admin_creation = true;
         cookie_secure = true;
         disable_gravatar = true;
       };

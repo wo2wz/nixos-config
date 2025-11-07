@@ -4,6 +4,10 @@
   sops.secrets = {
     "acme/secrets.env" = {};
 
+    "kanidm/oauth2/grafana" = {
+      owner = "kanidm";
+      group = "kanidm";
+    };
     "kanidm/oauth2/nextcloud" = {
       owner = "kanidm";
       group = "kanidm";
@@ -65,21 +69,45 @@
       persons.wo2w = {
         displayName = "wo2w";
         legalName = "Wo2wz_";
+        mailAddresses = [ "wo2w@kanidm.wo2wz.fyi" ];
+
+        groups = [
+          "grafana_users"
+          "nextcloud_users"
+          "zipline_users"
+
+          "grafana_admins"
+        ];
       };
 
       groups = {
-        nextcloud-grp.members = [ "wo2w" ];
-        zipline-grp.members = [ "wo2w" ];
+        grafana_users = {};
+        nextcloud_users = {};
+        zipline_users = {};
+
+        grafana_admins.members = [ "grafana_users" ];
       };
 
       systems.oauth2 = {
+        grafana = {
+          displayName = "Grafana";
+          originUrl = "https://grafana.taild5f7e6.ts.net/login/generic_oauth";
+          originLanding = "https://grafana.taild5f7e6.ts.net";
+
+          preferShortUsername = true;
+          basicSecretFile = config.sops.secrets."kanidm/oauth2/grafana".path;
+          scopeMaps.grafana_users = [ "openid" "email" "profile" "groups" "offline_access" ];
+          claimMaps.grafana_users.valuesByGroup.grafana_admins = [ "GrafanaAdmin" ];
+        };
+
         nextcloud = {
           displayName = "Nextcloud";
           originUrl = "https://nextcloud.wo2wz.fyi/index.php/apps/user_oidc/code";
           originLanding = "https://nextcloud.wo2wz.fyi/index.php";
 
+          preferShortUsername = true;
           basicSecretFile = config.sops.secrets."kanidm/oauth2/nextcloud".path;
-          scopeMaps.nextcloud-grp = [ "openid" "profile" ];
+          scopeMaps.nextcloud_users = [ "openid" "profile" ];
         };
 
         zipline = {
@@ -87,9 +115,10 @@
           originUrl = "https://zipline.wo2wz.fyi/api/auth/oauth/oidc";
           originLanding = "https://zipline.wo2wz.fyi";
 
+          preferShortUsername = true;
           allowInsecureClientDisablePkce = true;
           basicSecretFile = config.sops.secrets."kanidm/oauth2/zipline".path;
-          scopeMaps.zipline-grp = [ "openid" "profile" "email" "offline_access" ];
+          scopeMaps.zipline_users = [ "openid" "profile" "email" "offline_access" ];
         };
       };
     };
