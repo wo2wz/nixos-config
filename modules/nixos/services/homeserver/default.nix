@@ -2,9 +2,9 @@
 
 {
   imports = [
+    ./grafana
     ./caddy.nix
     ./cloudflared.nix
-    ./grafana.nix
     ./kanidm.nix
     ./nextcloud.nix
     ./ntfy.nix

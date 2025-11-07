@@ -68,11 +68,7 @@
         {
           name = "Node Exporter Full";
           disableDeletion = true;
-          options.path = builtins.fetchurl {
-            url = "https://grafana.com/api/dashboards/1860/revisions/42/download";
-            name = "node-exporter-full.json";
-            sha256 = "sha256:0phjy96kq4kymzggm0r51y8i2s2z2x3p69bd5nx4n10r33mjgn54";
-          };
+          options.path = ./dashboards/node-exporter-full.json
         }
       ];
 
