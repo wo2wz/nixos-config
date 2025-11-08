@@ -67,8 +67,13 @@
       dashboards.settings.providers = [
         {
           name = "Node Exporter Full";
-          disableDeletion = true;
           options.path = ./dashboards/node-exporter-full.json;
+          disableDeletion = true;
+        }
+        {
+          name = "Caddy";
+          options.path = ./dashboards/caddy.json;
+          disableDeletion = true;
         }
       ];
 
@@ -113,6 +118,14 @@
         static_configs = [
           {
             targets = [ "localhost:${toString config.services.prometheus.exporters.node.port}" ];
+          }
+        ];
+      }
+      {
+        job_name = "Caddy";
+        static_configs = [
+          {
+            targets = [ "localhost:2019" ];
           }
         ];
       }
