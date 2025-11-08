@@ -52,6 +52,11 @@
       '';
       globalConfig = ''
         grace_period 30s
+
+        metrics {
+            per_host
+        }
+
         servers {
             client_ip_headers CF-Connecting-Ip X-Forwarded-For
             trusted_proxies cloudflare {
