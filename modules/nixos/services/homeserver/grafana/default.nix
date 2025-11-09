@@ -44,6 +44,9 @@
         allow_assign_grafana_admin = true;
 
         allow_sign_up = true;
+        auto_login = true;
+        signout_redirect_url = "https://kanidm.wo2wz.fyi";
+
         use_pkce = true;
         use_refresh_token = true;
       };
