@@ -5,6 +5,7 @@
     ./grafana
     ./caddy.nix
     ./cloudflared.nix
+    ./jellyfin.nix
     ./kanidm.nix
     ./nextcloud.nix
     ./ntfy.nix

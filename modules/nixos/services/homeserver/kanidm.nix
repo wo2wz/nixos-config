@@ -8,6 +8,10 @@
       owner = "kanidm";
       group = "kanidm";
     };
+    "kanidm/oauth2/jellyfin" = {
+      owner = "kanidm";
+      group = "kanidm";
+    };
     "kanidm/oauth2/nextcloud" = {
       owner = "kanidm";
       group = "kanidm";
@@ -73,19 +77,23 @@
 
         groups = [
           "grafana_users"
+          "jellyfin_users"
           "nextcloud_users"
           "zipline_users"
 
           "grafana_admins"
+          "jellyfin_admins"
         ];
       };
 
       groups = {
         grafana_users = {};
+        jellyfin_users = {};
         nextcloud_users = {};
         zipline_users = {};
 
         grafana_admins.members = [ "grafana_users" ];
+        jellyfin_admins.members = [ "jellyfin_users" ];
       };
 
       systems.oauth2 = {
@@ -98,6 +106,17 @@
           basicSecretFile = config.sops.secrets."kanidm/oauth2/grafana".path;
           scopeMaps.grafana_users = [ "openid" "email" "profile" "groups" "offline_access" ];
           claimMaps.grafana_users.valuesByGroup.grafana_admins = [ "GrafanaAdmin" ];
+        };
+
+        jellyfin = {
+          displayName = "Jellyfin";
+          originUrl = "https://jellyfin.taild5f7e6.ts.net/sso/OID/redirect/Kanidm";
+          originLanding = "https://jellyfin.taild5f7e6.ts.net";
+
+          preferShortUsername = true;
+          basicSecretFile = config.sops.secrets."kanidm/oauth2/jellyfin".path;
+          scopeMaps.jellyfin_users = [ "openid" "profile" "groups" ];
+          claimMaps.grafana_users.valuesByGroup.jellyfin_admins = [ "JellyfinAdmin" ];
         };
 
         nextcloud = {
