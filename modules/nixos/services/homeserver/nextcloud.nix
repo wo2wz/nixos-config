@@ -73,6 +73,8 @@
       };
 
       maxUploadSize = "200G";
+      default_phone_region = "US";
+      maintenance_window_start = 2;
     };
   };
 
