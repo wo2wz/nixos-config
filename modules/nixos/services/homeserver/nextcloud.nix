@@ -49,7 +49,7 @@
   services = {
     nextcloud = {
       enable = true;
-      package = pkgs.nextcloud31;
+      package = pkgs.nextcloud32;
       hostName = "localhost:8002";
       configureRedis = true;
       config = {
@@ -62,7 +62,6 @@
         trusted_proxies = [ "127.0.0.1" "::1" ];
       };
 
-      maxUploadSize = "200G";
       extraApps = {
         inherit (config.services.nextcloud.package.packages.apps)
         calendar
@@ -72,6 +71,8 @@
         twofactor_webauthn
         user_oidc;
       };
+
+      maxUploadSize = "200G";
     };
   };
 
