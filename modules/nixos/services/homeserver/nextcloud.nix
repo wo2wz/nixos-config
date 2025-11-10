@@ -60,6 +60,17 @@
       settings = {
         trusted_domains = [ "nextcloud.wo2wz.fyi" ];
         trusted_proxies = [ "127.0.0.1" "::1" ];
+
+        default_phone_region = "US";
+        maintenance_window_start = 2;
+      };
+
+      poolSettings = {
+        pm = "dynamic";
+        "pm.max_children" = "52";
+        "pm.start_servers" = "16";
+        "pm.min_spare_servers" = "8";
+        "pm.max_spare_servers" = "16";
       };
 
       extraApps = {
@@ -73,8 +84,6 @@
       };
 
       maxUploadSize = "200G";
-      default_phone_region = "US";
-      maintenance_window_start = 2;
     };
   };
 
