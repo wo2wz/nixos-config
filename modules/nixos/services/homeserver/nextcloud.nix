@@ -81,6 +81,12 @@
         tasks
         twofactor_webauthn
         user_oidc;
+
+        files_archive = pkgs.fetchNextcloudApp {   
+          url = "https://github.com/rotdrop/nextcloud-app-files-archive/releases/download/v1.2.8/files_archive.tar.gz";
+          hash = "sha256:8d02ac423a2c7ef3f039290f56c7981da4002765b50be56bcfa594028a11a4c3";
+          license = "agpl3Only";
+        };
       };
 
       maxUploadSize = "200G";
