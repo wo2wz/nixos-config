@@ -77,7 +77,7 @@
         inherit (config.services.nextcloud.package.packages.apps)
         calendar
         deck
-        onlyoffice
+        richdocuments
         tasks
         twofactor_webauthn
         user_oidc;
@@ -87,31 +87,31 @@
     };
   };
 
-  sops.secrets."onlyoffice/jwt" = {
-    owner = "onlyoffice";
-    group = "onlyoffice";
-  };
-
-  services.caddy.virtualHosts."onlyoffice.wo2wz.fyi".extraConfig =
+  services.caddy.virtualHosts."collabora.wo2wz.fyi".extraConfig =
     assert config.services.caddy.enable;
     ''
       import default-settings
       import cloudflare-tls
 
-      @blockinternal {
-        path /internal/*
-        path /info/*
-        not remote_ip 127.0.0.1
-      }
-      respond @blockinternal 403
-
-      reverse_proxy localhost:8003
+      reverse_proxy localhost:${toString config.services.collabora-online.port}
     '';
 
-  services.onlyoffice = {
+  services.collabora-online = {
     enable = true;
-    hostname = "localhost";
     port = 8003;
-    jwtSecretFile = config.sops.secrets."onlyoffice/jwt".path;
+    settings = {
+      server_name = "collabora.wo2wz.fyi";
+      net = {
+        listen = "loopback";
+        post_allow.host = [ ''127\.0\.0\.1'' "::1" ];
+      };
+      ssl = {
+        enable = false;
+        termination = true;
+      };
+
+      allowed_languages = "en_US";
+      remote_font_config.url = "https://nextcloud.wo2wz.fyi/index.php/apps/richdocuments/settings/fonts.json";
+    };
   };
 }
