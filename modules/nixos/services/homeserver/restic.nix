@@ -28,6 +28,9 @@
         $SQLITE_PATH /var/lib/nextcloud/data/nextcloud.db ".backup $DB_BACKUP_DIR/nextcloud.db"
         $SQLITE_PATH /var/lib/ntfy-sh/user.db ".backup $DB_BACKUP_DIR/ntfy-user.db"
         $SQLITE_PATH /var/lib/kanidm/kanidm.db ".backup $DB_BACKUP_DIR/kanidm.db"
+        $SQLITE_PATH /var/lib/jellyfin/data/jellyfin.db ".backup $DB_BACKUP_DIR/jellyfin.db"
+        $SQLITE_PATH /var/lib/jellyfin/data/library.db ".backup $DB_BACKUP_DIR/jellyfin-library.db"
+        $SQLITE_PATH /var/lib/grafana/data/grafana.db ".backup $DB_BACKUP_DIR/grafana.db"
 
         $SUDO_PATH -u onlyoffice -- $PGDUMP_PATH > $DB_BACKUP_DIR/dump-onlyoffice
         $SUDO_PATH -u zipline -- $PGDUMP_PATH > $DB_BACKUP_DIR/dump-zipline
@@ -79,6 +82,7 @@
       };
 
       paths = [
+        "/var/lib/jellyfin"
         "/var/lib/vaultwarden"
         "/var/backups/db-backup"
       ];
