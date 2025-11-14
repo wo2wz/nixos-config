@@ -7,7 +7,7 @@
       import default-settings
       import cloudflare-tls
 
-      reverse_proxy localhost:8005
+      reverse_proxy localhost:${config.services.uptime-kuma.settings.PORT}
     '';
 
   services.uptime-kuma = {

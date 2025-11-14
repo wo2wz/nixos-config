@@ -9,7 +9,7 @@
       import default-settings
       import cloudflare-tls
 
-      reverse_proxy localhost:8001
+      reverse_proxy localhost:${toString config.services.zipline.settings.CORE_PORT}
     '';
 
   users.users.zipline = {
