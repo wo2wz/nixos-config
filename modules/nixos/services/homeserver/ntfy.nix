@@ -9,7 +9,7 @@
 
     bind tailscale/ntfy
 
-    reverse_proxy localhost:8006
+    reverse_proxy localhost${config.services.ntfy-sh.settings.listen-http}
   '';
 
   users = {
