@@ -25,6 +25,7 @@
     kdePackages.gwenview
     krita
     vlc
+    jellyfin-tui
     gpu-screen-recorder-gtk
   ];
 
