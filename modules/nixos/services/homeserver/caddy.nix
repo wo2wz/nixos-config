@@ -25,7 +25,7 @@
           "github.com/WeidiDeng/caddy-cloudflare-ip@v0.0.0-20231130002422-f53b62aa13cb"
           "github.com/tailscale/caddy-tailscale@v0.0.0-20251102144943-aea8960a2d3c"
         ];
-        hash = "sha256-8vqddvsZJyIlnx5Kq5F549xRg7Jvbm0xd5I/GCO+gog=";
+        hash = "sha256-PVYV9aNVP6CGvoyq3DaChSCkaXGPaCpfSD4SnSNlcEc=";
       };
       environmentFile = config.sops.secrets."caddy/secrets.env".path;
 
