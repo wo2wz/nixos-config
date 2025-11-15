@@ -23,5 +23,6 @@ in {
         inputs.nixpkgs-pin.legacyPackages.${pkgs.system}.graalvm-ce
       ];
     })
+    alsa-oss # fix audio bug on some instances
   ];
 }
