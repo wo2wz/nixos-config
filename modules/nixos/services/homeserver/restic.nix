@@ -15,7 +15,6 @@
 
         SQLITE_PATH=${lib.getExe pkgs.sqlite}
         SUDO_PATH=${lib.getExe pkgs.sudo}
-        PGDUMP_PATH=${lib.getExe' pkgs.postgresql "pg_dump"}
 
         if [ ! -d $DB_BACKUP_DIR ]; then
             mkdir -p -m 600 $DB_BACKUP_DIR
@@ -31,10 +30,6 @@
         $SQLITE_PATH /var/lib/jellyfin/data/jellyfin.db ".backup $DB_BACKUP_DIR/jellyfin.db"
         $SQLITE_PATH /var/lib/jellyfin/data/library.db ".backup $DB_BACKUP_DIR/jellyfin-library.db"
         $SQLITE_PATH /var/lib/grafana/data/grafana.db ".backup $DB_BACKUP_DIR/grafana.db"
-
-        $SUDO_PATH -u onlyoffice -- $PGDUMP_PATH > $DB_BACKUP_DIR/dump-onlyoffice
-        $SUDO_PATH -u zipline -- $PGDUMP_PATH > $DB_BACKUP_DIR/dump-zipline
-        $SUDO_PATH -u postgres -- ${lib.getExe' pkgs.postgresql "pg_dumpall"} -g > $DB_BACKUP_DIR/dump-globals
       '';
       serviceConfig.Type = "oneshot";
     };

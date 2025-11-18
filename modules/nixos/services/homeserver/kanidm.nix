@@ -16,10 +16,6 @@
       owner = "kanidm";
       group = "kanidm";
     };
-    "kanidm/oauth2/zipline" = {
-      owner = "kanidm";
-      group = "kanidm";
-    };
   };
 
   users.groups.tls-kanidm.members = [ "caddy" "kanidm" ];
@@ -79,7 +75,6 @@
           "grafana_users"
           "jellyfin_users"
           "nextcloud_users"
-          "zipline_users"
 
           "grafana_admins"
           "jellyfin_admins"
@@ -90,7 +85,6 @@
         grafana_users = {};
         jellyfin_users = {};
         nextcloud_users = {};
-        zipline_users = {};
 
         grafana_admins.members = [ "grafana_users" ];
         jellyfin_admins.members = [ "jellyfin_users" ];
@@ -127,17 +121,6 @@
           preferShortUsername = true;
           basicSecretFile = config.sops.secrets."kanidm/oauth2/nextcloud".path;
           scopeMaps.nextcloud_users = [ "openid" "profile" ];
-        };
-
-        zipline = {
-          displayName = "Zipline";
-          originUrl = "https://zipline.wo2wz.fyi/api/auth/oauth/oidc";
-          originLanding = "https://zipline.wo2wz.fyi";
-
-          preferShortUsername = true;
-          allowInsecureClientDisablePkce = true;
-          basicSecretFile = config.sops.secrets."kanidm/oauth2/zipline".path;
-          scopeMaps.zipline_users = [ "openid" "profile" "email" "offline_access" ];
         };
       };
     };
