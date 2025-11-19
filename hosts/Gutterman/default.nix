@@ -10,6 +10,7 @@
     ../../modules/nixos/programs/git.nix
 
     ../../modules/nixos/services/tailscale
+    ../../modules/nixos/services/gameserver/minecraft-server.nix
 
     ../../modules/nixos/system/headless.nix
     ../../modules/nixos/system/minimal.nix
@@ -29,27 +30,8 @@
     CacheFromLocalhost=true
   '';
 
-  networking.firewall = {
-    allowedTCPPorts = [
-      8000
-      8001
-    ];
-    allowedUDPPorts = [
-      8000
-      8001
-    ];
-  };
-
-  environment.systemPackages =
-  let
-    nixpkgs-unstable = import inputs.nixpkgs-unstable {
-      system = "${pkgs.system}";
-      config.allowUnfree = true;
-    };
-  in [
+  environment.systemPackages = [
     pkgs.btop
-    nixpkgs-unstable.graalvmPackages.graalvm-oracle_17
-    inputs.nixpkgs-pin.legacyPackages.${pkgs.system}.graalvm-ce
     pkgs.steamcmd
   ];
 
