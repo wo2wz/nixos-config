@@ -14,7 +14,7 @@
         SUDO_PATH=${lib.getExe pkgs.sudo}
 
         if [ ! -d $DB_BACKUP_DIR ]; then
-            mkdir -p -m 600 $DB_BACKUP_DIR
+            mkdir -p -m 700 $DB_BACKUP_DIR
         fi
 
         umask 077
@@ -45,7 +45,7 @@
     main = {
       user = "restic";
       package = pkgs.writeShellScriptBin "restic" ''
-         exec /run/wrappers/bin/restic "$@"
+        exec /run/wrappers/bin/restic "$@"
       '';
 
       initialize = true;
