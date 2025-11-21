@@ -1,7 +1,8 @@
 keys:
-  - &primary age19ey5xs9gxy0738tcp2a66zcye2cxj6suhcwa6y39x3w0sdvyr5tsxp0rlj
+  - &drone age19ey5xs9gxy0738tcp2a66zcye2cxj6suhcwa6y39x3w0sdvyr5tsxp0rlj
 creation_rules:
-  - path_regex: secrets/secrets.yaml$
+  - path_regex: secrets/.+\.yaml$
     key_groups:
     - age:
-      - *primary
+      - *drone
+
