@@ -10,6 +10,7 @@
     ../../modules/nixos/programs/git.nix
 
     ../../modules/nixos/services/tailscale
+    ../../modules/nixos/services/tailscale/exit-node/server.nix
     ../../modules/nixos/services/gameserver/minecraft-server.nix
 
     ../../modules/nixos/system/headless.nix
