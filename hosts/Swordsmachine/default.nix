@@ -14,6 +14,7 @@
     ../../modules/nixos/programs/gaming.nix
 
     ../../modules/nixos/services/tailscale
+    ../../modules/nixos/services/tailscale/exit-node/client.nix
     
     ../../modules/nixos/system/colors.nix
     ../../modules/nixos/system/console-colors.nix
