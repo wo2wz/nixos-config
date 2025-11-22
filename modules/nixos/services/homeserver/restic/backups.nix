@@ -43,7 +43,7 @@
 
   services.restic.backups = {
     main = {
-      user = "restic";
+      user = "restic-backup";
       package = pkgs.writeShellScriptBin "restic" ''
         exec /run/wrappers/bin/restic "$@"
       '';
