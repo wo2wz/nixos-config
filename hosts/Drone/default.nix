@@ -11,6 +11,8 @@
 
     ../../modules/nixos/services/homeserver
     ../../modules/nixos/services/tailscale
+    ../../modules/nixos/services/restic.nix
+    ../../modules/nixos/services/sops.nix
 
     ../../modules/nixos/system/minimal.nix
   ];
