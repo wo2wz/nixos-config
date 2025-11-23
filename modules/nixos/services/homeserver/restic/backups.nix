@@ -1,7 +1,10 @@
 { config, pkgs, lib, ... }:
 
 {
-  sops.secrets."restic/password" = {};
+  sops.secrets = {
+    "restic/password" = {};
+    "restic/rest-auth.env" = {};
+  };
 
   systemd.services = {
     db-backup = {
@@ -49,7 +52,8 @@
       '';
 
       initialize = true;
-      repository = "/mnt/external/backup/restic";
+      repository = "rest:http://localhost:8001/drone";
+      environmentFile = config.sops.secrets."restic/rest-auth.env".path;
       passwordFile = config.sops.secrets."restic/password".path;
       timerConfig = {
         OnCalendar = "03:00";

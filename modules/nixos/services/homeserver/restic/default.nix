@@ -3,5 +3,6 @@
 {
   imports = [
     ./backups.nix
+    ./rest-server.nix
   ];
 }
