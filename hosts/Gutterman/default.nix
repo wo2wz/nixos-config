@@ -11,7 +11,9 @@
 
     ../../modules/nixos/services/tailscale
     ../../modules/nixos/services/tailscale/exit-node/server.nix
-    ../../modules/nixos/services/gameserver/minecraft-server.nix
+    ../../modules/nixos/services/gameserver
+    ../../modules/nixos/services/restic.nix
+    ../../modules/nixos/services/sops.nix
 
     ../../modules/nixos/system/headless.nix
     ../../modules/nixos/system/minimal.nix

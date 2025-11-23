@@ -1,8 +1,13 @@
 keys:
   - &drone age19ey5xs9gxy0738tcp2a66zcye2cxj6suhcwa6y39x3w0sdvyr5tsxp0rlj
+  - &gutterman age1t3n08lsemjmflt8nw2je4cr62g8e6evpxsakhcgtzhgp6rmn7u6s29lnpa
 creation_rules:
-  - path_regex: secrets/.+\.yaml$
+  - path_regex: secrets/drone\.yaml$
     key_groups:
     - age:
       - *drone
 
+  - path_regex: secrets/gutterman\.yaml$
+    key_groups:
+    - age:
+      - *gutterman
