@@ -60,10 +60,5 @@
       open-on-workspace = "fullscreen";
       open-maximized = true;
     }
-    {
-      matches = [{ app-id = "spotify"; }];
-      open-on-workspace = "fullscreen";
-      open-maximized = true;
-    }
   ];
 }
