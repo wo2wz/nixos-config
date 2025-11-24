@@ -59,7 +59,7 @@
         };
         OpenInApp = {
           enabled = true;
-          spotify = true;
+          spotify = false;
           steam = true;
           epic = false;
           tidal = false;
