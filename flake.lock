@@ -28,7 +28,9 @@
         "nixpkgs": [
           "nixpkgs"
         ],
-        "nixpkgs-stable": "nixpkgs-stable",
+        "nixpkgs-stable": [
+          "nixpkgs"
+        ],
         "xwayland-satellite-stable": "xwayland-satellite-stable",
         "xwayland-satellite-unstable": "xwayland-satellite-unstable"
       },
@@ -144,22 +146,6 @@
         "owner": "NixOS",
         "repo": "nixpkgs",
         "rev": "336eda0d07dc5e2be1f923990ad9fdb6bc8e28e3",
-        "type": "github"
-      }
-    },
-    "nixpkgs-stable": {
-      "locked": {
-        "lastModified": 1763948260,
-        "narHash": "sha256-dY9qLD0H0zOUgU3vWacPY6Qc421BeQAfm8kBuBtPVE0=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "1c8ba8d3f7634acac4a2094eef7c32ad9106532c",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "nixos-25.05",
-        "repo": "nixpkgs",
         "type": "github"
       }
     },
