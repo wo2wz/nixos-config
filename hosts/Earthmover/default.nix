@@ -12,7 +12,6 @@
     ../../modules/nixos/programs/gaming.nix
 
     ../../modules/nixos/services/tailscale
-    ../../modules/nixos/services/mumble.nix
 
     ../../modules/nixos/system/colors.nix
     ../../modules/nixos/system/console-colors.nix
