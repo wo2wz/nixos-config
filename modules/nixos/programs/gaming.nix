@@ -1,11 +1,6 @@
 { inputs, config, pkgs, ... }:
 
-let
-  nixpkgs-unstable = import inputs.nixpkgs-unstable {
-    system = "${pkgs.system}";
-    config.allowUnfree = true;
-  };
-in {
+{
   programs = {
     gamemode.enable = true; # performance tuning for games
     steam = {
@@ -19,7 +14,7 @@ in {
       # Change Java runtimes available to Prism Launcher
       jdks = [
         jdk8
-        nixpkgs-unstable.graalvmPackages.graalvm-oracle_17
+        graalvmPackages.graalvm-oracle_17
         inputs.nixpkgs-pin.legacyPackages.${pkgs.system}.graalvm-ce
       ];
     })
