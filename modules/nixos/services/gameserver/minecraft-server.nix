@@ -18,17 +18,11 @@
     groups.minecraft = {};
   };
 
-  environment.systemPackages =
-  let
-    nixpkgs-unstable = import inputs.nixpkgs-unstable {
-      system = "${pkgs.system}";
-      config.allowUnfree = true;
-    };
-  in [
+  environment.systemPackages = [
     # to control the interactive server console
     pkgs.screen
 
-    nixpkgs-unstable.graalvmPackages.graalvm-oracle_17
+    pkgs.graalvmPackages.graalvm-oracle_17
     inputs.nixpkgs-pin.legacyPackages.${pkgs.system}.graalvm-ce
   ];
 
