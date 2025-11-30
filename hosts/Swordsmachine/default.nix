@@ -22,6 +22,7 @@
     ../../modules/nixos/system/fonts.nix
     ../../modules/nixos/system/home-manager.nix
     ../../modules/nixos/system/laptop.nix
+    ../../modules/nixos/system/printing.nix
     ../../modules/nixos/system/scx.nix
     ../../modules/nixos/system/swap.nix
     ../../modules/nixos/system/yubikey.nix
@@ -44,11 +45,6 @@
 
   # necessary to make the camera not look like the sun
   environment.systemPackages = [ pkgs.cameractrls ];
-
-  services.printing = {
-    enable = true;
-    drivers = [ pkgs.cups-brother-hll2375dw ];
-  };
 
   home-manager.users.wo2w = {
     imports = [
