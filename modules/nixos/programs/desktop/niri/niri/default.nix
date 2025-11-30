@@ -12,13 +12,20 @@
 
   environment.systemPackages = [
     pkgs.xwayland-satellite # necessary for xwayland on niri
+
     pkgs.bibata-cursors
   ];
 
-  xdg.portal.config.niri = {
-    default = "gtk";
-    "org.freedesktop.impl.portal.ScreenCast" = "gnome";
-    "org.freedesktop.impl.portal.Secret" = "gnome-keyring";
+  xdg.portal = {
+    extraPortals = [ pkgs.kdePackages.xdg-desktop-portal-kde ];
+    config.niri = {
+      default = [
+        "kde"
+        "gtk"
+      ];
+      "org.freedesktop.impl.portal.ScreenCast" = "gnome";
+      "org.freedesktop.impl.portal.Secret" = "gnome-keyring";
+    };
   };
 
   services.gnome.gnome-keyring.enable = lib.mkForce false;
