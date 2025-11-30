@@ -15,9 +15,6 @@
   };
   security.rtkit.enable = true;
 
-  # CUPS
-  services.printing.enable = true;
-
   # enable native wayland in chromium/electron
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
