@@ -7,6 +7,9 @@
     ../../modules/common/nix.nix
     ../../modules/common/users.nix
 
+    ../../modules/nixos/programs/bash.nix
+    ../../modules/nixos/programs/git.nix
+
     inputs.nixos-avf.nixosModules.avf
   ];
 
