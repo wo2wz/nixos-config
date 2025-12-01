@@ -32,7 +32,6 @@
       enable-login = true;
       require-login = true;
       auth-access = [
-        "wo2w:*:rw"
         "*:*:none"
       ];
 
