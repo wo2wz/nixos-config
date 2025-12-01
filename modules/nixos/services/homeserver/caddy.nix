@@ -20,12 +20,12 @@
     caddy = {
       enable = true;
       # use unstable for caddy-tailscale
-      package = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.caddy.withPlugins {
+      package = inputs.nixpkgs-unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system}.caddy.withPlugins {
         plugins = [
           "github.com/WeidiDeng/caddy-cloudflare-ip@v0.0.0-20231130002422-f53b62aa13cb"
-          "github.com/tailscale/caddy-tailscale@v0.0.0-20251102144943-aea8960a2d3c"
+          "github.com/tailscale/caddy-tailscale@v0.0.0-20251117033914-662ef34c64b1"
         ];
-        hash = "sha256-PVYV9aNVP6CGvoyq3DaChSCkaXGPaCpfSD4SnSNlcEc=";
+        hash = "sha256-4A61SjbnaQNVbbhfGsr+WUtpmm1YGY1n0wjfDdrcYWg=";
       };
       environmentFile = config.sops.secrets."caddy/secrets.env".path;
 

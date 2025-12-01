@@ -11,7 +11,7 @@
       enable = true;
       settings.default_session = {
         command = ''
-        ${lib.getExe pkgs.greetd.tuigreet} \
+        ${lib.getExe pkgs.tuigreet} \
         --cmd niri-session \
         --power-shutdown poweroff \
         --power-reboot reboot \
