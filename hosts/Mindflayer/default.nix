@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ../../modules/common/debloat.nix
     ../../modules/common/locales.nix
     ../../modules/common/nix.nix
     ../../modules/common/users.nix
