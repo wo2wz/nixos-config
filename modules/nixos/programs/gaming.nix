@@ -15,7 +15,7 @@
       jdks = [
         jdk8
         graalvmPackages.graalvm-oracle_17
-        inputs.nixpkgs-pin.legacyPackages.${pkgs.system}.graalvm-ce
+        inputs.nixpkgs-pin.legacyPackages.${pkgs.stdenv.hostPlatform.system}.graalvm-ce
       ];
     })
     alsa-oss # fix audio bug on some instances

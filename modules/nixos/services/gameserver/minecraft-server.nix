@@ -23,7 +23,7 @@
     pkgs.screen
 
     pkgs.graalvmPackages.graalvm-oracle_17
-    inputs.nixpkgs-pin.legacyPackages.${pkgs.system}.graalvm-ce
+    inputs.nixpkgs-pin.legacyPackages.${pkgs.stdenv.hostPlatform.system}.graalvm-ce
   ];
 
   environment.etc = {
@@ -125,7 +125,7 @@
     after = [ "network-online.target" ];
 
     path = [ pkgs.screen ];
-    script = "screen -dmS minecraft -- ${lib.getExe inputs.nixpkgs-pin.legacyPackages.${pkgs.system}.graalvm-ce} @/etc/minecraft/java21_args -jar server.jar nogui";
+    script = "screen -dmS minecraft -- ${lib.getExe inputs.nixpkgs-pin.legacyPackages.${pkgs.stdenv.hostPlatform.system}.graalvm-ce} @/etc/minecraft/java21_args -jar server.jar nogui";
 
     serviceConfig = {
       User = "minecraft";
