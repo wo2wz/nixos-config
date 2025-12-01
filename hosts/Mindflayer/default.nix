@@ -9,8 +9,6 @@
     inputs.nixos-avf.nixosModules.avf
   ];
 
-  networking.hostName = "Mindflayer";
-
   nixpkgs.hostPlatform = "aarch64-linux";
   system.stateVersion = "25.05";
 }
