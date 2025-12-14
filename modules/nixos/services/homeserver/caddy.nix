@@ -50,6 +50,7 @@
             }
         }
       '';
+      # have to specify node tags here because if there are two tailscale blocks it just dont work
       globalConfig = ''
         grace_period 30s
 
@@ -71,6 +72,27 @@
             state_dir ${config.services.caddy.dataDir}/caddy-tailscale
 
             ephemeral true
+
+            tags tag:drone
+
+            grafana {
+                tags tag:drone tag:grafana
+            }
+            jellyfin {
+                tags tag:drone tag:jellyfin
+            }
+            ntfy {
+                tags tag:drone tag:ntfy
+            }
+            prometheus {
+                tags tag:drone tag:prometheus
+            }
+            restic {
+                tags tag:drone tag:restic
+            }
+            vaultwarden {
+                tags tag:drone tag:vaultwarden
+            }
         }
       '';
 
