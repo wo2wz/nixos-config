@@ -12,6 +12,7 @@
 
     ../../modules/nixos/programs/bash.nix
     ../../modules/nixos/programs/gaming.nix
+    ../../modules/nixos/programs/scrcpy.nix
 
     ../../modules/nixos/services/tailscale
     ../../modules/nixos/services/tailscale/exit-node/client.nix
