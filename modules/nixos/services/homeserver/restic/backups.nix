@@ -44,57 +44,39 @@
     restic-backups-main.serviceConfig.Type = "oneshot";
   };
 
-  services.restic.backups = {
-    main = {
-      user = "restic-backup";
-      package = pkgs.writeShellScriptBin "restic" ''
-        exec /run/wrappers/bin/restic "$@"
-      '';
+  services.restic.backups.main = {
+    user = "restic-backup";
+    package = pkgs.writeShellScriptBin "restic" ''
+      exec /run/wrappers/bin/restic "$@"
+    '';
 
-      initialize = true;
-      repository = "rest:http://localhost:8001/drone";
-      environmentFile = config.sops.secrets."restic/rest-auth.env".path;
-      passwordFile = config.sops.secrets."restic/password".path;
-      timerConfig = {
-        OnCalendar = "03:00";
-        Persistent = true;
-      };
-
-      paths = [
-        "/var/lib/jellyfin"
-        "/var/lib/vaultwarden"
-        "/var/backups/db-backup"
-      ];
-
-      # exclude databases since they are covered separately
-      exclude = [
-        "/var/lib/**/*.db"
-        "/var/lib/**/*.db-shm"
-        "/var/lib/**/*.db-wal"
-        "/var/lib/**/*.sqlite3"
-        "/var/lib/**/*.sqlite3-shm"
-        "/var/lib/**/*.sqlite3-wal"
-
-        "/var/lib/vaultwarden/sends/*"
-        "/var/lib/vaultwarden/tmp/*"
-      ];
+    environmentFile = config.sops.secrets."restic/rest-auth.env".path;
+    passwordFile = config.sops.secrets."restic/password".path;
+    timerConfig = {
+      OnCalendar = "03:00";
+      Persistent = true;
     };
 
-#    offsite = {
-#      initialize = true;
-#      repository = "rclone:protondrive:restic";
-#      passwordFile = config.sops.secrets."restic/password".path;
-#      timerConfig = {
-#        OnCalendar = "3:05";
-#        Persistent = true;
-#      };
-#      rcloneOptions = { protondrive-replace-existing-draft = true; };
-#      rcloneConfigFile = config.sops.secrets."restic/rclone/offsite".path;
+    repository = "rest:http://localhost:8001/drone";
+    initialize = true;
 
-#      paths = config.services.restic.backups.main.paths;
-#      exclude = config.services.restic.backups.main.exclude;
+    paths = [
+      "/var/lib/jellyfin"
+      "/var/lib/vaultwarden"
+      "/var/backups/db-backup"
+    ];
 
-#      backupCleanupCommand = "rm -r /var/backups/db-backup/*";
-#    };
+    # exclude databases since they are covered separately
+    exclude = [
+      "/var/lib/**/*.db"
+      "/var/lib/**/*.db-shm"
+      "/var/lib/**/*.db-wal"
+      "/var/lib/**/*.sqlite3"
+      "/var/lib/**/*.sqlite3-shm"
+      "/var/lib/**/*.sqlite3-wal"
+
+      "/var/lib/vaultwarden/sends/*"
+      "/var/lib/vaultwarden/tmp/*"
+    ];
   };
 }

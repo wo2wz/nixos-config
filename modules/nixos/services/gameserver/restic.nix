@@ -14,14 +14,15 @@
       exec /run/wrappers/bin/restic "$@"
     '';
 
-    initialize = true;
-    repository = "rest:https://restic.taild5f7e6.ts.net/gutterman/gameservers";
     environmentFile = config.sops.secrets."restic/rest-auth.env".path;
     passwordFile = config.sops.secrets."restic/password".path;
     timerConfig = {
       OnCalendar = "03:00";
       Persistent = true;
     };
+
+    repository = "rest:https://restic.taild5f7e6.ts.net/gutterman/gameservers";
+    initialize = true;
 
     paths = [
       "/var/lib/minecraft"
