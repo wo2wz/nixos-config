@@ -12,14 +12,6 @@
     reverse_proxy localhost${config.services.ntfy-sh.settings.listen-http}
   '';
 
-  users = {
-    users.ntfy-sh = {
-      isSystemUser = true;
-      group = "ntfy-sh";
-    };
-    groups.ntfy-sh = {};
-  };
-
   services.ntfy-sh = {
     enable = true;
     settings = {
