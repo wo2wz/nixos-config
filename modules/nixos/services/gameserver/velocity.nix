@@ -13,19 +13,13 @@
 
   networking.firewall = {
     allowedTCPPorts = [ 10000 ];
-    allowedUDPPorts = [
-      10000
-      19132 # for geyser
-    ];
+    allowedUDPPorts = [ 19132 ]; # for geyser
   };
 
   users = {
     users.velocity = {
       group = "velocity";
       isSystemUser = true;
-
-      home = "/var/lib/velocity";
-      createHome = true;
     };
     groups.velocity = {};
   };
