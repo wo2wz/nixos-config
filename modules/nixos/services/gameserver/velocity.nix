@@ -116,7 +116,7 @@
       java \
       -Xmx1G -Xms1G -XX:+UseG1GC -XX:G1HeapRegionSize=4M -XX:+UnlockExperimentalVMOptions -XX:+ParallelRefProcEnabled -XX:+AlwaysPreTouch -XX:MaxInlineLevel=15 \
       -Dvelocity.max-known-packs=264 \
-      -jar ${pkgs.velocity}/share/velocity/velocity.jar
+      -jar /var/lib/velocity/velocity-3.4.0-SNAPSHOT-558.jar
     '';
 
     serviceConfig = {
