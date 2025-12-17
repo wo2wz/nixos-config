@@ -40,8 +40,6 @@
       script = "rm -r /var/backups/db-backup";
       serviceConfig.Type = "oneshot";
     };
-
-    restic-backups-main.serviceConfig.Type = "oneshot";
   };
 
   services.restic.backups.main = {
@@ -78,5 +76,25 @@
       "/var/lib/vaultwarden/sends/*"
       "/var/lib/vaultwarden/tmp/*"
     ];
+  };
+
+  services.restic.backups.syncthing = {
+    user = "restic-backup";
+    package = pkgs.writeShellScriptBin "restic" ''
+      exec /run/wrappers/bin/restic "$@"
+    '';
+
+    environmentFile = config.sops.secrets."restic/rest-auth.env".path;
+    passwordFile = config.sops.secrets."restic/password".path;
+    timerConfig = {
+      OnCalendar = "03:05";
+      Persistent = true;
+    };
+
+    repository = "rest:http://localhost:8001/drone/syncthing";
+    initialize = true;
+
+    paths = [ "/var/lib/syncthing" ];
+    exclude = [ "/var/lib/syncthing/.*" ];
   };
 }
