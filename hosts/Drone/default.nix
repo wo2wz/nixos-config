@@ -13,6 +13,8 @@
     ../../modules/nixos/services/tailscale
     ../../modules/nixos/services/restic.nix
     ../../modules/nixos/services/sops.nix
+    ../../modules/nixos/services/syncthing
+    ../../modules/nixos/services/syncthing/server.nix
 
     ../../modules/nixos/system/minimal.nix
   ];
