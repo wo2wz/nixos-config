@@ -14,6 +14,8 @@
     ../../modules/nixos/programs/gaming.nix
     ../../modules/nixos/programs/scrcpy.nix
 
+    ../../modules/nixos/services/syncthing
+    ../../modules/nixos/services/syncthing/main.nix
     ../../modules/nixos/services/tailscale
     ../../modules/nixos/services/tailscale/exit-node/client.nix
     

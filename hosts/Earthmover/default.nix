@@ -11,6 +11,8 @@
     ../../modules/nixos/programs/desktop/niri/niri/workspaces/dual-monitor.nix
     ../../modules/nixos/programs/gaming.nix
 
+    ../../modules/nixos/services/syncthing
+    ../../modules/nixos/services/syncthing/main.nix
     ../../modules/nixos/services/tailscale
 
     ../../modules/nixos/system/colors.nix
