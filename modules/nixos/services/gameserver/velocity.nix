@@ -125,6 +125,8 @@
       StateDirectory = "velocity";
       StateDirectoryMode = "0700";
       WorkingDirectory = "%S/velocity";
+      # velocity doesnt have a --config :(
+      BindReadOnlyPaths = "/etc/velocity/velocity.toml:%S/velocity/velocity.toml";
 
       Type = "exec";
       Restart = "always";
