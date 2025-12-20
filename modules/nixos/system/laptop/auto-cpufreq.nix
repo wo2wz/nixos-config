@@ -1,12 +1,6 @@
 { config, ... }:
 
 {
-  services.logind.settings.Login = {
-    HandleLidSwitch = "suspend";
-    HandleLidSwitchExternalPower = "lock";
-    HandleLidSwitchDocked = "ignore";
-  };
-
   services = {
     tlp.enable = false;
     power-profiles-daemon.enable = false;

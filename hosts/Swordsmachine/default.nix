@@ -19,12 +19,12 @@
     ../../modules/nixos/services/tailscale
     ../../modules/nixos/services/tailscale/exit-node/client.nix
     
+    ../../modules/nixos/system/laptop
     ../../modules/nixos/system/colors.nix
     ../../modules/nixos/system/console-colors.nix
     ../../modules/nixos/system/desktop.nix
     ../../modules/nixos/system/fonts.nix
     ../../modules/nixos/system/home-manager.nix
-    ../../modules/nixos/system/laptop.nix
     ../../modules/nixos/system/printing.nix
     ../../modules/nixos/system/scx.nix
     ../../modules/nixos/system/swap.nix
