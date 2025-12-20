@@ -1,8 +1,8 @@
-{ inputs, config, modulesPath, lib, pkgs, ... }:
+{ inputs, config, pkgs, ... }:
 
 {
   imports = [
-    (modulesPath + "/virtualisation/proxmox-lxc.nix")
+    ./hardware-configuration.nix
 
     ../../modules/common
 
@@ -15,29 +15,14 @@
     ../../modules/nixos/services/restic.nix
     ../../modules/nixos/services/sops.nix
 
-    ../../modules/nixos/system/headless.nix
+    ../../modules/nixos/system/laptop/auto-cpufreq.nix
     ../../modules/nixos/system/minimal.nix
   ];
-
-  proxmoxLXC.manageHostName = true;
-
-  # enabled by default in the proxmox-lxc module in nixpkgs
-  services.openssh.enable = false;
-
-  boot.loader.systemd-boot.enable = lib.mkForce false;
-
-  services.fstrim.enable = false;
-
-  services.resolved.extraConfig = ''
-    Cache=true
-    CacheFromLocalhost=true
-  '';
 
   environment.systemPackages = [
     pkgs.btop
     pkgs.steamcmd
   ];
 
-  nixpkgs.hostPlatform = "x86_64-linux";
-  system.stateVersion = "25.05";
+  system.stateVersion = "25.11";
 }
