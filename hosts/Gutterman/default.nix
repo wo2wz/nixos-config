@@ -19,6 +19,20 @@
     ../../modules/nixos/system/minimal.nix
   ];
 
+  networking = {
+    useDHCP = false;
+    interfaces.enp0s20f0u1.ipv4.addresses = [{
+      # ip leak
+      address = "192.168.2.129";
+      prefixLength = 24;
+    }];
+    defaultGateway = "192.168.2.1";
+    nameservers = [
+      "192.168.2.19"
+      "1.1.1.1"
+    ];
+  };
+
   environment.systemPackages = [
     pkgs.btop
     pkgs.steamcmd
