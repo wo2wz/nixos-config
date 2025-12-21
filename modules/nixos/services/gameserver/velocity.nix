@@ -1,4 +1,4 @@
-{ inputs, config, pkgs, ... }:
+{ inputs, config, pkgs, lib, ... }:
 
 {
   users.groups.velocity-secret.members = [
@@ -111,14 +111,6 @@
     wants = [ "network-online.target" ];
     after = [ "network-online.target" ];
 
-    path = [ inputs.nixpkgs-pin.legacyPackages.${pkgs.stdenv.hostPlatform.system}.graalvm-ce ];
-    script = ''
-      java \
-      -Xmx1G -Xms1G -XX:+UseG1GC -XX:G1HeapRegionSize=4M -XX:+UnlockExperimentalVMOptions -XX:+ParallelRefProcEnabled -XX:+AlwaysPreTouch -XX:MaxInlineLevel=15 \
-      -Dvelocity.max-known-packs=264 \
-      -jar /var/lib/velocity/velocity-3.4.0-SNAPSHOT-558.jar
-    '';
-
     serviceConfig = {
       User = "velocity";
       Group = "velocity";
@@ -128,6 +120,13 @@
       # velocity doesnt have a --config :(
       BindReadOnlyPaths = "/etc/velocity/velocity.toml:%S/velocity/velocity.toml";
 
+
+      ExecStart = lib.concatStringsSep " " [
+        "${lib.getExe inputs.nixpkgs-pin.legacyPackages.${pkgs.stdenv.hostPlatform.system}.graalvm-ce}"
+        "-Xmx1G -Xms1G -XX:+UseG1GC -XX:G1HeapRegionSize=4M -XX:+UnlockExperimentalVMOptions -XX:+ParallelRefProcEnabled -XX:+AlwaysPreTouch -XX:MaxInlineLevel=15"
+        "-Dvelocity.max-known-packs=264"
+        "-jar /var/lib/velocity/velocity-3.4.0-SNAPSHOT-558.jar"
+      ];
       Type = "exec";
       Restart = "always";
 
