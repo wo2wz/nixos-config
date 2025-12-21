@@ -134,7 +134,7 @@
       # hardening
       CapabilityBoundingSet = [ "" ];
       DeviceAllow = [ "" ];
-      DevicePolicy = "strict";
+      DevicePolicy = "closed";
       LockPersonality = true;
       NoNewPrivileges = true;
       PrivateDevices = true;
