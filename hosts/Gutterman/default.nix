@@ -19,6 +19,12 @@
     ../../modules/nixos/system/minimal.nix
   ];
 
+  services.logind.settings.Login = {
+    HandleLidSwitch = "ignore";
+    HandleLidSwitchExternalPower = "ignore";
+    HandleLidSwitchDocked = "ignore";
+  };
+
   networking = {
     useDHCP = false;
     interfaces.enp0s20f0u1.ipv4.addresses = [{
