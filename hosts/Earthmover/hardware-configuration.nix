@@ -21,7 +21,7 @@
   fileSystems."/boot" =
     { device = "/dev/disk/by-id/nvme-WD_BLACK_SN7100_2TB_252830800317-part1";
       fsType = "vfat";
-      options = [ "fmask=0022" "dmask=0022" ];
+      options = [ "fmask=0077" "dmask=0077" ];
     };
 
   swapDevices = [ ];

@@ -28,6 +28,7 @@
   fileSystems."/boot" =
     { device = "/dev/disk/by-uuid/D867-8F68";
       fsType = "vfat";
+      options = [ "fmask=0077" "dmask=0077" ];
     };
 
   fileSystems."/home" =
