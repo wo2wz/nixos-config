@@ -4,8 +4,8 @@
   programs.vesktop = {
     enable = true;
     vencord.settings = {
-      themeLinks = [ "https://catppuccin.github.io/discord/dist/catppuccin-mocha.theme.css" ];
-      enabledThemes = [ "catppuccin-mocha.theme.css" ];
+      themeLinks = [ "https://raw.githubusercontent.com/refact0r/system24/refs/heads/main/theme/flavors/system24-tokyo-night.theme.css" ];
+      enabledThemes = [ "system24-tokyo-night.theme.css" ];
       plugins = {
         ChatInputButtonAPI.enabled = true;
         CommandsAPI.enabled = true;
