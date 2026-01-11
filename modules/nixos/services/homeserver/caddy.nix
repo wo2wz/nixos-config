@@ -1,4 +1,4 @@
-{ inputs, config, pkgs, ... }:
+{ config, pkgs, ... }:
 
 {
   sops.secrets = {
@@ -20,12 +20,12 @@
     caddy = {
       enable = true;
       # use unstable for caddy-tailscale
-      package = inputs.nixpkgs-unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system}.caddy.withPlugins {
+      package = pkgs.caddy.withPlugins {
         plugins = [
           "github.com/WeidiDeng/caddy-cloudflare-ip@v0.0.0-20231130002422-f53b62aa13cb"
-          "github.com/tailscale/caddy-tailscale@v0.0.0-20251117033914-662ef34c64b1"
+          "github.com/tailscale/caddy-tailscale@v0.0.0-20260106222316-bb080c4414ac"
         ];
-        hash = "sha256-4A61SjbnaQNVbbhfGsr+WUtpmm1YGY1n0wjfDdrcYWg=";
+        hash = "sha256-ST0MYExPlBbZt2xyFfyMdQRq5n06dgwOZkEeGO8dDeA=";
       };
       environmentFile = config.sops.secrets."caddy/secrets.env".path;
 
