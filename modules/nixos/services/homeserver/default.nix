@@ -11,6 +11,7 @@
     ./nextcloud.nix
     ./ntfy.nix
     ./sops.nix
+    ./technitium-dns.nix
     ./uptime-kuma.nix
     ./vaultwarden.nix
     ./zed.nix
