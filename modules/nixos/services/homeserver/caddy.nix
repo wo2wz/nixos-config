@@ -90,6 +90,9 @@
             restic {
                 tags tag:drone tag:restic
             }
+            technitium {
+                tags tag:drone tag:technitium
+            }
             vaultwarden {
                 tags tag:drone tag:vaultwarden
             }
