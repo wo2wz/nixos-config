@@ -3,20 +3,17 @@
 {
   sops.secrets = {
     "acme/secrets.env" = {};
-
-    "kanidm/oauth2/grafana" = {
-      owner = "kanidm";
-      group = "kanidm";
-    };
-    "kanidm/oauth2/jellyfin" = {
-      owner = "kanidm";
-      group = "kanidm";
-    };
-    "kanidm/oauth2/nextcloud" = {
-      owner = "kanidm";
-      group = "kanidm";
-    };
-  };
+  }
+  // lib.genAttrs [
+    "kanidm/oauth2/grafana"
+    "kanidm/oauth2/jellyfin"
+    "kanidm/oauth2/nextcloud"
+    "kanidm/oauth2/vaultwarden"
+  ]
+  (x: {
+    owner = "kanidm";
+    group = "kanidm";
+  });
 
   users.groups.tls-kanidm.members = [ "caddy" "kanidm" ];
 
@@ -75,17 +72,20 @@
           "grafana_users"
           "jellyfin_users"
           "nextcloud_users"
+          "vaultwarden_users"
 
           "grafana_admins"
           "jellyfin_admins"
         ];
       };
 
-      groups = {
-        grafana_users = {};
-        jellyfin_users = {};
-        nextcloud_users = {};
-
+      groups = lib.genAttrs [
+        "grafana_users"
+        "jellyfin_users"
+        "nextcloud_users"
+        "vaultwarden_users"
+      ] (x: {})
+      // {
         grafana_admins.members = [ "grafana_users" ];
         jellyfin_admins.members = [ "jellyfin_users" ];
       };
@@ -121,6 +121,16 @@
           preferShortUsername = true;
           basicSecretFile = config.sops.secrets."kanidm/oauth2/nextcloud".path;
           scopeMaps.nextcloud_users = [ "openid" "profile" ];
+        };
+        
+        vaultwarden = {
+          displayName = "Vaultwarden";
+          originUrl = "https://vaultwarden.taild5f7e6.ts.net/identity/connect/oidc-signin";
+          originLanding = "https://vaultwarden.taild5f7e6.ts.net";
+
+          preferShortUsername = true;
+          basicSecretFile = config.sops.secrets."kanidm/oauth2/vaultwarden".path;
+          scopeMaps.vaultwarden_users = [ "openid" "email" "profile" "offline_access" ];
         };
       };
     };
