@@ -7,12 +7,12 @@
     "caddy/wo2wz.fyi.crt" = {
       owner = "caddy";
       group = "caddy";
-      reloadUnits = [ "caddy.service" ];
+      restartUnits = [ "caddy.service" ];
     };
     "caddy/wo2wz.fyi.key" = {
       owner = "caddy";
       group = "caddy";
-      reloadUnits = [ "caddy.service" ];
+      restartUnits = [ "caddy.service" ];
     };
   };
 
