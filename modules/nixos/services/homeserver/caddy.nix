@@ -19,13 +19,9 @@
   services = {
     caddy = {
       enable = true;
-      # use unstable for caddy-tailscale
       package = pkgs.caddy.withPlugins {
-        plugins = [
-          "github.com/WeidiDeng/caddy-cloudflare-ip@v0.0.0-20231130002422-f53b62aa13cb"
-          "github.com/tailscale/caddy-tailscale@v0.0.0-20260106222316-bb080c4414ac"
-        ];
-        hash = "sha256-ST0MYExPlBbZt2xyFfyMdQRq5n06dgwOZkEeGO8dDeA=";
+        plugins = [ "github.com/tailscale/caddy-tailscale@v0.0.0-20260106222316-bb080c4414ac" ];
+        hash = "sha256-1BAY6oZ1qJCKlh0Y2KKqw87A45EUPVtwS2Su+LfXtCc=";
       };
       environmentFile = config.sops.secrets."caddy/secrets.env".path;
 
@@ -60,11 +56,7 @@
 
         servers {
             client_ip_headers CF-Connecting-Ip X-Forwarded-For
-            trusted_proxies cloudflare {
-                interval 7d
-                timeout 15s
-            }
-            trusted_proxies_strict
+            trusted_proxies static 127.0.0.1 ::1
         }
 
         tailscale {
@@ -103,7 +95,7 @@
         import default-settings
         import cloudflare-tls
 
-        respond "not much to see here"
+        respond "{client_ip}"
       '';
     };
   };
