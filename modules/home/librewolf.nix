@@ -59,8 +59,8 @@
 
         # encrypted dns
         "network.trr.mode" = 2;
-        "network.trr.uri" = "https://base.dns.mullvad.net/dns-query";
-        "network.trr.custom_uri" = "https://base.dns.mullvad.net/dns-query";
+        "network.trr.uri" = "https://technitium.taild5f7e6.ts.net/dns-query";
+        "network.trr.custom_uri" = "https://technitium.taild5f7e6.ts.net/dns-query";
 
         "privacy.clearHistory.formdata" = true;
         "privacy.clearHistory.siteSettings" = false;
