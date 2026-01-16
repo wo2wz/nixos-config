@@ -37,7 +37,7 @@
 
     prevent-client-proxy-connections = false;
 
-    player-info-forwarding-mode = "modern";
+    player-info-forwarding-mode = "legacy";
     forwarding-secret-file = config.sops.secrets."velocity/forwarding.secret".path;
 
     announce-forge = false;
@@ -50,17 +50,17 @@
     enable-player-address-logging = true;
 
     servers = {
-      monifactory = "127.0.0.1:10001";
+      divine-journey-2 = "127.0.0.1:10001";
       countries = "127.0.0.1:10002";
 
       try = [
-        "monifactory"
+        "divine-journey-2"
         "countries"
       ];
     };
 
     forced-hosts = {
-      "moni.mc.wo2wz.fyi" = [ "monifactory" ];
+      "dj2.mc.wo2wz.fyi" = [ "divine-journey-2" ];
       "countries.mc.wo2wz.fyi" = [ "countries" ];
     };
     
@@ -108,8 +108,8 @@
   systemd.services.velocity = {
     description = "Velocity proxy for Minecraft servers";
     wantedBy = [ "multi-user.target" ];
-    wants = [ "network-online.target" ];
-    after = [ "network-online.target" ];
+    wants = [ "network.target" ];
+    after = [ "network.target" ];
 
     serviceConfig = {
       User = "velocity";
