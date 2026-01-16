@@ -105,7 +105,7 @@
   systemd = {
     targets.multi-user.wants = [
       "minecraft@countries.service"
-      "minecraft@monifactory.service"
+      "minecraft@divine-journey-2.service"
     ];
 
     sockets."minecraft@" = {
@@ -122,10 +122,11 @@
 
     services."minecraft@" = {
       description = "Minecraft Java Edition server for %i";
-      wants = [ "network-online.target" "velocity.service" ];
-      after = [ "network-online.target" "velocity.service" ];
+      wants = [ "network.target" "velocity.service" ];
+      after = [ "network.target" "velocity.service" ];
 
       environment = {
+        JAVA_8_PATH = lib.getExe pkgs.jdk8_headless;
         JAVA_17_PATH = lib.getExe pkgs.graalvmPackages.graalvm-oracle_17;
         JAVA_21_PATH = lib.getExe inputs.nixpkgs-pin.legacyPackages.${pkgs.stdenv.hostPlatform.system}.graalvm-ce;
       };
